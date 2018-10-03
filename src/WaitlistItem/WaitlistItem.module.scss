@@ -1,0 +1,41 @@
+$hover-bg-color: #e7f0fa;
+
+.container {
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+}
+
+.options {
+  transition: max-height ease-in 300ms;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.mainRow {
+  display: flex;
+  align-contents: center;
+  justify-contents: space-between;
+  color: #2B2B2B;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.name {
+  flex-grow: 2;
+  font-size: 18px;
+}
+
+.partySize {
+  flex-shrink: 0;
+  width: 10px;
+  font-size: 20px;
+}
+
+.opened {
+  background-color: $hover-bg-color;
+}
+
+.opened .options {
+  max-height: 200px;
+}

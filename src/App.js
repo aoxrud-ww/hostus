@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Waitlist from './Waitlist/Waitlist.js';
+
+
+import './App.scss';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      list: [
+        {
+          groupName: "Now",
+          list: [
+            {id: 1, name: "Alex Oxrud", partySize: 3},
+            {id: 2, name: "Oscar Waczynski", partySize: 2}
+          ]
+        },
+        {
+          groupName: "3:00pm",
+          list: [
+            {id: 1, name: "Elon Musk", partySize: 6},
+            {id: 2, name: "Amara Grey Oxrud", partySize: 3}
+          ]
+        }
+      ]
+    };
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='App'>
+        <Waitlist list={this.state.list} title="Waitlist"></Waitlist>
       </div>
     );
   }
