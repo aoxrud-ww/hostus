@@ -13,7 +13,7 @@ class WaitlistGroup extends Component {
         <ul className={styles.list}>
           {this.props.items.map(data => (
             <li key={data.id} className={styles.item}>
-              <WaitlistItem item={data} />
+              <WaitlistItem item={data} onDelete={this.props.onDelete} onNotify={this.props.onNotify} />
             </li>
           ))}
         </ul>

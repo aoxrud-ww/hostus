@@ -11,6 +11,9 @@ class WaitlistItem extends Component {
       showOptions: false
     };
     this.itemClick = this.itemClick.bind(this);
+    this.notify = this.notify.bind(this);
+    this.delete = this.delete.bind(this);
+
   }
 
   toggleOptions() {
@@ -23,6 +26,14 @@ class WaitlistItem extends Component {
     this.toggleOptions();
   }
 
+  delete() {
+    this.props.onDelete(this.props.item);
+  }
+
+  notify() {
+    this.props.onNotify(this.props.item);
+  }
+
   getClassName() {
     return [styles.container, this.state.showOptions && styles.opened].join(' ');
   }
@@ -30,7 +41,7 @@ class WaitlistItem extends Component {
   render() {
     return (
       <div className={this.getClassName()}>
-        <a className={styles.mainRow} onClick={this.itemClick}>
+        <a className={styles.mainRow} onClick={this.itemClick} href="javascript:void(0)">
           <div className={styles.name}>
             {this.props.item.name}
           </div>
@@ -39,7 +50,7 @@ class WaitlistItem extends Component {
           </div>
         </a>
         <div className={styles.options}>
-        {this.state.showOptions && <WaitlistItemOptions />}
+        {this.state.showOptions && <WaitlistItemOptions onDelete={this.delete} onNotify={this.notify} />}
         </div>
       </div>
     );

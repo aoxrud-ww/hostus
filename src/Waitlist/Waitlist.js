@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import WaitlistGroup from '../WaitlistGroup/WaitlistGroup.js';
 import styles from './Waitlist.module.scss';
+import { connect } from "react-redux";
+
 
 class Waitlist extends Component {
   render() {
@@ -11,7 +13,7 @@ class Waitlist extends Component {
         </header>
         <ul className={styles.list}>
           {this.props.list.map(row =>
-            (<WaitlistGroup key={row.groupName} header={row.groupName} items={row.list} />)
+            (<WaitlistGroup key={row.groupName} header={row.groupName} items={row.list} onDelete={this.props.onDelete} onNotify={this.props.onNotify} />)
           )}
         </ul>
       </div>
@@ -19,4 +21,23 @@ class Waitlist extends Component {
   }
 }
 
-export default Waitlist;
+const mapStateToProps = state => {
+  return { list: state.list };
+};
+
+
+const mapDispatchToProps = {
+  onDelete(item) {
+    return {
+      type: 'delete',
+      item
+    }
+  },
+  onNotify(item) {
+    return {
+      type: 'notify',
+      item
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Waitlist);

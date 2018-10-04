@@ -27,6 +27,7 @@ class CancelableButton extends Component {
     }
 
     this.delayedAction = new DelayedAction({
+      delay: 500,
       onAction: () => {
         this.props.trigger();
       },

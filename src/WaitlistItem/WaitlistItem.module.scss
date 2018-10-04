@@ -1,17 +1,5 @@
 $hover-bg-color: #e7f0fa;
 
-.container {
-  &:hover {
-    background-color: $hover-bg-color;
-  }
-}
-
-.options {
-  transition: max-height ease-in 300ms;
-  max-height: 0;
-  overflow: hidden;
-}
-
 .mainRow {
   display: flex;
   align-contents: center;
@@ -19,11 +7,46 @@ $hover-bg-color: #e7f0fa;
   color: #2B2B2B;
   cursor: pointer;
   padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $hover-bg-color;
+    opacity: 0;
+    transition: opacity ease-in 200ms;
+    z-index: 0;
+  }
+
+  & > * {
+    position: relative;
+  }
+
+  &:hover, &:focus {
+    outline: none;
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.options {
+  transition: max-height ease-in 300ms;
+  max-height: 0;
+  overflow: hidden;
+  background-color: $hover-bg-color;
 }
 
 .name {
   flex-grow: 2;
   font-size: 18px;
+  font-weight: 200;
 }
 
 .partySize {
@@ -33,9 +56,13 @@ $hover-bg-color: #e7f0fa;
 }
 
 .opened {
-  background-color: $hover-bg-color;
-}
+  .mainRow {
+    &::before {
+      opacity: 1;
+    }
+  }
 
-.opened .options {
-  max-height: 200px;
+  .options {
+    max-height: 200px;
+  }
 }

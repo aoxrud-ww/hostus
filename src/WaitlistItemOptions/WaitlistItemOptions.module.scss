@@ -1,10 +1,23 @@
 .container {
-  padding: 1rem;
   box-shadow: 0 -5px 5px -5px rgba(0,0,0,.1) inset;
+  position: relative;
+
+}
+.buttons {
+  padding: 1rem ;
 
   > * {
     margin-right: 1rem;
-    margin-bottom: 1rem;
-
   }
+}
+.feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  background-color: #0F80F8;
+  color: white;
+  letter-spacing: 1px;
 }
