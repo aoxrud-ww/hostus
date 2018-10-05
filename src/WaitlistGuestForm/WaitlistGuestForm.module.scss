@@ -38,22 +38,22 @@
   padding: 0 .5rem;
 }
 
-input, textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #E7EEF9;
-  padding: 0.5rem 0;
-  box-shadow: none;
-  font-size: 20px;
-  line-height: 20px;
-  outline: none;
+// input, textarea {
+//   width: 100%;
+//   border: none;
+//   border-bottom: 2px solid #E7EEF9;
+//   padding: 0.5rem 0;
+//   box-shadow: none;
+//   font-size: 20px;
+//   line-height: 20px;
+//   outline: none;
 
 
-  &::placeholder {
-    color: rgba(0,0,0,.3);
-  }
+//   &::placeholder {
+//     color: rgba(0,0,0,.3);
+//   }
 
-  &:focus {
-    border-color: #238AF8;
-  }
-}
+//   &:focus {
+//     border-color: #238AF8;
+//   }
+// }

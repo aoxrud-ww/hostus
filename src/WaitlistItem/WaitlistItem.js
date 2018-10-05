@@ -41,11 +41,17 @@ class WaitlistItem extends Component {
     return (
       <div className={this.getClassName()}>
         <a className={styles.mainRow} onClick={this.itemClick} href="javascript:void(0)">
+          <div className={styles.partySize}>
+            {this.props.item.partySize}
+          </div>
           <div className={styles.name}>
             {this.props.item.name}
           </div>
-          <div className={styles.partySize}>
-            {this.props.item.partySize}
+          <div className={styles.waiting}>
+            {this.props.item.waiting}
+          </div>
+          <div className={styles.quoted}>
+            {this.props.item.quoted}
           </div>
         </a>
         <div className={styles.options}>

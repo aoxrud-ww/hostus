@@ -10,6 +10,8 @@ $hover-bg-color: #e7f0fa;
   position: relative;
   text-decoration: none;
   position: relative;
+  font-size: 18px;
+  outline: none;
 
   &::before {
     content: "";
@@ -29,7 +31,6 @@ $hover-bg-color: #e7f0fa;
   }
 
   &:hover, &:focus {
-    outline: none;
     &::before {
       opacity: 1;
     }
@@ -45,14 +46,12 @@ $hover-bg-color: #e7f0fa;
 
 .name {
   flex-grow: 2;
-  font-size: 18px;
   font-weight: 200;
 }
 
 .partySize {
   flex-shrink: 0;
-  width: 10px;
-  font-size: 20px;
+  width: 50px;
 }
 
 .opened {

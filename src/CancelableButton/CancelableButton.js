@@ -43,6 +43,9 @@ class CancelableButton extends Component {
         }), () => this.props.onStatus(this.state));
       },
       onCleanup: () => {
+        if(!this.props.shouldCleanup) {
+          return;
+        }
         this.setState(state => ({
           isExecuting: false,
           didCancel: false
@@ -62,6 +65,10 @@ class CancelableButton extends Component {
       </button>
     );
   }
+}
+
+CancelableButton.defaultProps = {
+  shouldCleanup: true
 }
 
 export default CancelableButton;

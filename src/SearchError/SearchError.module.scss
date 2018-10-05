@@ -1,0 +1,14 @@
+.container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.icon {
+  $size: 64px;
+  width: $size;
+  height: $size;
+  opacity: 0.4;
+}
+.title {
+  opacity: 0.7;
+}

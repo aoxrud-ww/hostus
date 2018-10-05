@@ -22,7 +22,7 @@ class WaitlistItemOptions extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.buttons}>
-          <CancelableButton trigger={this.props.onDelete} onStatus={this.statusUpdate} template="Cancel Delete ({countdown})">
+          <CancelableButton trigger={this.props.onDelete} onStatus={this.statusUpdate} template="Cancel Delete ({countdown})" shouldCleanup={false}>
             Delete
           </CancelableButton>
 
