@@ -27,7 +27,7 @@ class WaitlistItemOptions extends Component {
           </CancelableButton>
 
           <CancelableButton trigger={this.props.onNotify} onStatus={this.statusUpdate} template="Cancel Notification ({countdown})">
-            Ready
+            Buzz
           </CancelableButton>
         </div>
       </div>

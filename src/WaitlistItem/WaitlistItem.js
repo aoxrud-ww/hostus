@@ -13,7 +13,6 @@ class WaitlistItem extends Component {
     this.itemClick = this.itemClick.bind(this);
     this.notify = this.notify.bind(this);
     this.delete = this.delete.bind(this);
-
   }
 
   toggleOptions() {
