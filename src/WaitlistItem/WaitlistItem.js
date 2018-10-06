@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styles from './WaitlistItem.module.scss';
 import WaitlistItemOptions from '../WaitlistItemOptions/WaitlistItemOptions.js';
+import Duration from '../Duration/Duration.js';
+import Status from '../Status/Status.js';
+import classnames from 'classnames';
 
 class WaitlistItem extends Component {
 
@@ -33,26 +36,34 @@ class WaitlistItem extends Component {
     this.props.onNotify(this.props.item);
   }
 
-  getClassName() {
-    return [styles.container, this.state.showOptions && styles.opened].join(' ');
-  }
-
   render() {
+    const classNames = classnames({
+      [styles.container]: true,
+      [styles.opened]: this.state.showOptions
+    });
+
     return (
-      <div className={this.getClassName()}>
+      <div className={classNames}>
         <a className={styles.mainRow} onClick={this.itemClick} href="javascript:void(0)">
+          <div className={styles.status}>
+            <Status value={this.props.item.status} />
+          </div>
           <div className={styles.partySize}>
             {this.props.item.partySize}
           </div>
           <div className={styles.name}>
             {this.props.item.name}
+            <div className={styles.note}>
+              {this.props.item.note}
+            </div>
           </div>
           <div className={styles.waiting}>
-            {this.props.item.waiting}
+            <Duration value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
           </div>
           <div className={styles.quoted}>
-            {this.props.item.quoted}
+            <Duration value={this.props.item.quoted} />
           </div>
+
         </a>
         <div className={styles.options}>
         {this.state.showOptions && <WaitlistItemOptions onDelete={this.delete} onNotify={this.notify} />}

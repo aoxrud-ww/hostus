@@ -1,0 +1,19 @@
+.status {
+  display: inline-block;
+  $size: 32px;
+  width: $size;
+  height: $size;
+  border-radius: $size / 2;
+}
+.value {
+  font-size: 16px;
+  margin-right: 3px;
+}
+
+.unit {
+  font-size: 12px;
+}
+
+.overdue {
+  color: red;
+}

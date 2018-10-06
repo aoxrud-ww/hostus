@@ -9,7 +9,9 @@ class Button extends Component {
   }
 
   click() {
-    this.props.onClick();
+    if(this.props.onClick) {
+      this.props.onClick();
+    }
   }
 
   render() {

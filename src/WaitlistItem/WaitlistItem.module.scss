@@ -22,7 +22,7 @@ $hover-bg-color: #e7f0fa;
     bottom: 0;
     background-color: $hover-bg-color;
     opacity: 0;
-    transition: opacity ease-in 200ms;
+    transition: opacity ease-out 150ms;
     z-index: 0;
   }
 
@@ -46,12 +46,28 @@ $hover-bg-color: #e7f0fa;
 
 .name {
   flex-grow: 2;
-  font-weight: 200;
 }
 
 .partySize {
   flex-shrink: 0;
-  width: 50px;
+  width: 80px;
+  text-align: center;
+}
+
+.waiting, .quoted {
+  width: 100px;
+}
+
+.status {
+  flex-shrink: 0;
+  width: 40px;
+  text-align: center;
+}
+
+.note {
+  padding-top: 5px;
+  font-size: 14px;
+  color: rgba(0,0,0,0.6);
 }
 
 .opened {

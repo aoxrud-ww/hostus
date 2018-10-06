@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.member, .navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: #dedede;
+  text-decoration: none;
+}
+
+.navigation a {
+  padding: 0.4rem 0.8rem;
+  display: block;
+  border-radius: 5px;
+  color: #dedede;
+  border: 1px solid transparent;
+}
+
+.navigation {
+  a:hover, .active {
+    background-color: #0E102C;
+    color: #dedee8;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+.upgrade {
+  color: #a3a7de;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.account {
+  display: flex;
+  align-items: center;
+}
+.member, .navigation {
+  li {
+    margin-right: 1.5rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.downArrow {
+  display: inline-block;
+  $size: 12px;
+  width: $size;
+  height: $size;
+  fill: white;
+  margin-left: 5px;
+}

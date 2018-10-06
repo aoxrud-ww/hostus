@@ -5,6 +5,12 @@ import { connect } from "react-redux";
 import SearchInput from '../SearchInput/SearchInput.js';
 import SearchError from '../SearchError/SearchError.js';
 import Button from '../Button/Button.js';
+import WaitlistHeader from '../WaitlistHeader/WaitlistHeader.js';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 
 class Waitlist extends Component {
@@ -42,13 +48,14 @@ class Waitlist extends Component {
     return (
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1 className={styles.title}>{this.props.title}</h1>
+          <h1 className={styles.title}>Waitlist</h1>
           <div className={styles.headerCta}>
-            <Button onClick={this.add}>Add</Button>
+            <Link to='/add-party'><Button>Add</Button></Link>
             <SearchInput onChange={this.onSearch} />
           </div>
         </header>
         <ul className={styles.list}>
+          <WaitlistHeader />
           {filteredSearch.map(item =>
             (<WaitlistItem key={item.id} item={item} onDelete={this.props.onDelete} onNotify={this.props.onNotify} />)
           )}

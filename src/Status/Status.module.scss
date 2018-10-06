@@ -1,0 +1,9 @@
+.status {
+  display: inline-block;
+  $size: 20px;
+  width: $size;
+  height: $size;
+  border-radius: $size / 2;
+  background-color: #EBCEF9;
+  border: 1px solid #C15EE8;
+}
