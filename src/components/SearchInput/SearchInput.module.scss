@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  outline: none;
+  box-shadow: none;
+  padding: 8px 20px 8px 40px;
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 15px;
+  border-color: white;
+  border: none;
+  font-size: 16px;
+  line-height: 16px;
+
+  &::placeholder {
+    color: rgba(0,0,0,.3);
+  }
+}
+
+.icon {
+  $size: 20px;
+  width: $size;
+  height: $size;
+  opacity: 0.5;
+  transition: opacity ease-in 200ms;
+}
+
+.iconContainer {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+}
+
+.focus {
+  .icon {
+    opacity: 1;
+  }
+}

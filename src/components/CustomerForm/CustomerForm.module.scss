@@ -1,0 +1,22 @@
+
+.twoColumn {
+  display: flex;
+  width: 100%;
+
+  > *:first-child {
+    margin-right: .5rem;
+    flex-grow: 1;
+  }
+
+  > *:last-child {
+    margin-left: .5rem;
+    flex-grow: 1;
+  }
+}
+
+.row {
+  margin-bottom: 1rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.input {
+  width: 100px;
+  margin-right: 1rem;
+}
+
+.shortcuts {
+  > * {
+    margin-right: 0.3rem;
+  }
+}
