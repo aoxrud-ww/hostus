@@ -9,6 +9,24 @@ export const notifyWaitlistCustomer = (item) => ({
   item
 });
 export const editWaitlistCustomer = (item) => ({
-  type: action.EDIT_WAITLIST_GUEST,
+  type: action.REMEMBER_WAITLIST_VISIT,
   item
+});
+
+
+
+export const addCustomer = customer => ({
+  type: action.ADD_WAITLIST_GUEST,
+  customer
+});
+
+
+export const updateWaitlistVisit = customer => ({
+  type: action.UPDATE_WAITLIST_VISIT,
+  customer
+});
+
+export const createWaitlistVisit = customer => ({
+  type: action.CREATE_WAITLIST_VISIT,
+  customer
 });

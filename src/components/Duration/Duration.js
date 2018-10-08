@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './Duration.module.scss';
 import classnames from 'classnames';
 
 
-class Duration extends Component {
+class Duration extends PureComponent {
 
   constructor(props) {
     super(props);

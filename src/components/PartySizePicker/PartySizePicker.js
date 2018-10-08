@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './PartySizePicker.module.scss';
 import Textfield from "../Textfield/Textfield.js";
 import Button from "../Button/Button.js";
-
+import IncrementInput from "../IncrementInput/IncrementInput.js";
 
 class PartySizePicker extends Component {
 
@@ -17,29 +17,33 @@ class PartySizePicker extends Component {
   }
 
   didChange(value) {
+    this.setState({
+      value
+    });
     this.props.onChange(value);
   }
 
   applyValue(e, buttonProps) {
     this.setState({
       value: buttonProps.data
+    }, () => {
+      this.didChange(buttonProps.data);
     });
-    this.props.onChange(buttonProps.data);
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.input}>
-          <Textfield value={this.state.value} label={this.props.label} onChange={this.didChange} placeholder="ie. 1" mask="[9[9]]" />
+        <div className={styles.inputContainer}>
+          <IncrementInput value={this.state.value} onChange={this.didChange} />
         </div>
         <div className={styles.shortcuts}>
-          <Button theme="tertiary" onClick={this.applyValue} data="1">1</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data="2">2</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data="3">3</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data="4">4</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data="5">5</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data="6">6</Button>
+          <Button theme="tertiary" onClick={this.applyValue} data={1}>1</Button>
+          <Button theme="tertiary" onClick={this.applyValue} data={2}>2</Button>
+          <Button theme="tertiary" onClick={this.applyValue} data={3}>3</Button>
+          <Button theme="tertiary" onClick={this.applyValue} data={4}>4</Button>
+          <Button theme="tertiary" onClick={this.applyValue} data={5}>5</Button>
+          <Button theme="tertiary" onClick={this.applyValue} data={6}>6</Button>
         </div>
       </div>
     );
@@ -48,7 +52,7 @@ class PartySizePicker extends Component {
 
 
 PartySizePicker.defaultProps = {
-  label: 'Party Size',
+  value: 1,
   onChange: () => {}
 };
 

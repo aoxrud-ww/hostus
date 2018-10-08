@@ -7,9 +7,10 @@ import SearchError from '../SearchError/SearchError.js';
 import Button from '../Button/Button.js';
 import PageHeader from '../PageHeader/PageHeader.js';
 import WaitlistHeader from '../WaitlistHeader/WaitlistHeader.js';
-import { Link } from 'react-router-dom'
+import WaitlistStats from '../WaitlistStats/WaitlistStats.js';
+import { Link } from 'react-router-dom';
+import * as routes  from '../../routes.js';
 import {deleteWailistCustomer, notifyWaitlistCustomer, editWaitlistCustomer} from '../../actions';
-
 
 class Waitlist extends Component {
   constructor(props) {
@@ -24,23 +25,23 @@ class Waitlist extends Component {
   }
 
   onEdit(customer) {
-    // console.log(e);
-    this.props.onEdit(customer)
-    this.props.history.push('/add-party');
+    this.props.onEdit(customer);
+    this.props.history.push(routes.CUSTOMER_PROFILE);
   }
 
   onSearch(searchQuery) {
     const query = searchQuery.toLowerCase();
     this.setState({
-      query
+      query,
+      list: this.getFilteredList(query)
     });
   }
 
-  getFilteredList() {
+  getFilteredList(query) {
     let list;
-    if(this.state.query) {
+    if(query) {
       list = this.props.list.filter(guest => {
-        return guest.name.toLowerCase().includes(this.state.query);
+        return guest.name.toLowerCase().includes(query);
       });
     } else {
       list = this.props.list;
@@ -49,19 +50,20 @@ class Waitlist extends Component {
   }
 
   render() {
-    const filteredSearch = this.getFilteredList();
+    const filteredList = this.getFilteredList(this.state.query);
 
     return (
       <div className={styles.container}>
         <PageHeader title="Waitlist">
           <div className={styles.headerCta}>
-            <Link to='/add-party'><Button theme='page-header'>Add</Button></Link>
+            <Link to={routes.ADD_GUEST}><Button theme='page-header'>Add</Button></Link>
             <SearchInput onChange={this.onSearch} />
           </div>
         </PageHeader>
+        <WaitlistStats />
         <ul className={styles.list}>
-          <WaitlistHeader />
-          {filteredSearch.map(item =>
+          {filteredList.length > 0 && <WaitlistHeader />}
+          {filteredList.map(item =>
             (<WaitlistItem
               key={item.id}
               item={item}
@@ -71,7 +73,7 @@ class Waitlist extends Component {
           )}
         </ul>
 
-        {!filteredSearch.length && <SearchError query={this.state.query} />}
+        {!filteredList.length && <SearchError query={this.state.query} />}
       </div>
     );
   }

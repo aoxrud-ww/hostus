@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import styles from './AddParty.module.scss';
+import styles from './CustomerProfile.module.scss';
 import { connect } from "react-redux";
 import Button from '../Button/Button.js';
 import PageHeader from '../PageHeader/PageHeader.js';
 import CustomerForm from '../CustomerForm/CustomerForm.js';
+import { updateWaitlistVisit } from '../../actions';
+import * as routes from '../../routes';
 
-
-class AddParty extends Component {
+class CustomerProfile extends Component {
 
   constructor(props) {
     super(props);
 
     this.updatedCustomerForm = this.updatedCustomerForm.bind(this);
     this.save = this.save.bind(this);
+    this.state = {};
   }
 
   updatedCustomerForm(customer) {
@@ -22,13 +24,15 @@ class AddParty extends Component {
   }
 
   save() {
-    console.log(this.state);
+    const customer = Object.assign({}, this.props.customer, this.state.customer);
+    this.props.update(customer);
+    this.props.history.push(routes.HOME);
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <PageHeader title="Add Guest" />
+        <PageHeader title="Profile" />
 
         <div className={styles.customer}>
           <div className={styles.form}>
@@ -41,8 +45,7 @@ class AddParty extends Component {
   }
 }
 
-AddParty.defaultProps = {
-};
+
 
 const mapStateToProps = state => {
   return {
@@ -52,36 +55,8 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = {
-
+  update: updateWaitlistVisit
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddParty);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerProfile);
 
-
-
-// const mapStateToProps = state => {
-//   return { list: state.list };
-// };
-
-
-// const mapDispatchToProps = {
-//   onDelete(item) {
-//     return {
-//       type: 'delete',
-//       item
-//     }
-//   },
-//   onNotify(item) {
-//     return {
-//       type: 'notify',
-//       item
-//     }
-//   },
-//   onEdit(item) {
-//     return {
-//       type: 'edit',
-//       item
-//     }
-//   }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Waitlist);

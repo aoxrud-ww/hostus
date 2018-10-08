@@ -3,10 +3,14 @@ import styles from './Status.module.scss';
 
 class Status extends PureComponent {
 
+  constructor(props) {
+    super(props);
+    this.classNames = `${styles.status} ${styles[this.props.value]}`;
+  }
+
   render() {
-    const classNames = `${styles.status} ${styles[this.props.value]}`;
     return (
-      <div className={classNames}/>
+      <div className={this.classNames}/>
     );
   }
 }

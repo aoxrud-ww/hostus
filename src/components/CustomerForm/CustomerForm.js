@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './CustomerForm.module.scss';
 import Textfield from '../Textfield/Textfield.js';
 import PartySizePicker from '../PartySizePicker/PartySizePicker.js';
 
-class CustomerForm extends Component {
+class CustomerForm extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -52,7 +52,7 @@ class CustomerForm extends Component {
 
 CustomerForm.defaultProps = {
   name: '',
-  partySize: '',
+  partySize: 1,
   phone: '',
   note: '',
   onChange: () => {}

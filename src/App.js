@@ -3,9 +3,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
+import * as routes from './routes.js';
+
 import Waitlist from './components/Waitlist/Waitlist.js';
 import AppHeader from './components/AppHeader/AppHeader.js';
-import AddParty from './components/AddParty/AddParty.js';
+import CreateVisit from './components/CreateVisit/CreateVisit.js';
+import CustomerProfile from './components/CustomerProfile/CustomerProfile.js';
+
 import reducer from './reducers';
 import './App.scss';
 
@@ -26,8 +30,9 @@ class App extends Component {
         <div className='App'>
           <AppHeader />
 
-          <Route exact path="/" component={Waitlist} />
-          <Route path="/add-party" component={AddParty} />
+          <Route exact path={routes.HOME} component={Waitlist} />
+          <Route path={routes.ADD_GUEST} component={CreateVisit} />
+          <Route path={routes.CUSTOMER_PROFILE} component={CustomerProfile} />
         </div>
       </Router>
       </Provider>

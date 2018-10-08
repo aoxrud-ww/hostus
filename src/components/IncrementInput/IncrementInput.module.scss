@@ -1,20 +1,16 @@
 .container {
-}
-
-.inputContainer {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 1rem;
 }
 
 .input {
-  width: 80px;
-  margin: 0 1rem;
-}
-
-.shortcuts {
-  display: flex;
-  justify-content: space-between;
+  border: 0;
+  box-shadow: 0;
+  appearance: none;
+  font-size: 25px;
+  padding: .8rem;
+  width: 30px;
+  text-align: center;
 }
 
 .incrementIcons {

@@ -59,4 +59,24 @@
       border-color: #767676;
     }
   }
+
+  &.icon {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+
+    svg {
+      fill: #888;
+    }
+
+    &:hover, &:focus {
+      svg {
+        fill: #3b7afd;
+      }
+    }
+
+    &::before {
+      border-color: transparent;
+    }
+  }
 }

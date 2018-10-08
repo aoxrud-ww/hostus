@@ -29,6 +29,7 @@ class CancelableButton extends Component {
 
     this.delayedAction = new DelayedAction({
       delay: 500,
+      cleanupOnAction: this.props.shouldCleanup,
       onAction: () => {
         this.props.trigger();
       },
@@ -44,9 +45,7 @@ class CancelableButton extends Component {
         }), () => this.props.onStatus(this.state));
       },
       onCleanup: () => {
-        if(!this.props.shouldCleanup) {
-          return;
-        }
+
         this.setState(state => ({
           isExecuting: false,
           didCancel: false
