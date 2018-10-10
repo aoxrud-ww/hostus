@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './PartySizePicker.module.scss';
-import Textfield from "../Textfield/Textfield.js";
 import Button from "../Button/Button.js";
 import IncrementInput from "../IncrementInput/IncrementInput.js";
 
@@ -17,9 +16,7 @@ class PartySizePicker extends Component {
   }
 
   didChange(value) {
-    this.setState({
-      value
-    });
+
     this.props.onChange(value);
   }
 
@@ -31,20 +28,26 @@ class PartySizePicker extends Component {
     });
   }
 
+  renderShortcuts() {
+    return (
+      <div className={styles.shortcuts}>
+        <Button theme="tertiary" onClick={this.applyValue} data={1}>1</Button>
+        <Button theme="tertiary" onClick={this.applyValue} data={2}>2</Button>
+        <Button theme="tertiary" onClick={this.applyValue} data={3}>3</Button>
+        <Button theme="tertiary" onClick={this.applyValue} data={4}>4</Button>
+        <Button theme="tertiary" onClick={this.applyValue} data={5}>5</Button>
+        <Button theme="tertiary" onClick={this.applyValue} data={6}>6</Button>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className={styles.container}>
         <div className={styles.inputContainer}>
           <IncrementInput value={this.state.value} onChange={this.didChange} />
         </div>
-        <div className={styles.shortcuts}>
-          <Button theme="tertiary" onClick={this.applyValue} data={1}>1</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data={2}>2</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data={3}>3</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data={4}>4</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data={5}>5</Button>
-          <Button theme="tertiary" onClick={this.applyValue} data={6}>6</Button>
-        </div>
+        {this.renderShortcuts()}
       </div>
     );
   }
