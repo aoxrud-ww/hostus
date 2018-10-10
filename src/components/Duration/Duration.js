@@ -13,7 +13,8 @@ class Duration extends PureComponent {
   getDuration() {
     let value = this.props.value;
     if(this.props.compareTo === 'now') {
-      value = Math.round((Date.now() - this.props.value) / 6000);
+      const seconds = (Date.now() - this.props.value) / 1000;
+      value = Math.round(seconds / 60);
     }
 
     return {
