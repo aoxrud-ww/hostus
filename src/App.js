@@ -15,10 +15,10 @@ import './App.scss';
 
 const store = createStore(reducer, {
   list: [
-    {id: 1, name: "Alex Oxrud", partySize: 3, quoted: 5, phone: "8015601194", createdAt: Date.now(), note: "Notes hello from hell"},
-    {id: 2, name: "Oscar Waczynski", partySize: 2, quoted: 5, createdAt: Date.now() - 250000},
-    {id: 3, name: "Elon Musk", partySize: 6, quoted: 15, createdAt: Date.now()- 60000},
-    {id: 4, name: "Amara Grey Oxrud", partySize: 3, quoted: 1, createdAt: Date.now() - 3123430}
+    {id: 1, name: "Alex Oxrud", partySize: 3, quoted: 5, phone: "8015601194", createdAt: Date.now(), note: "Notes from above.", status: "purple" },
+    {id: 2, name: "Oscar Waczynski", partySize: 2, quoted: 2, createdAt: Date.now() - 1000*60, status: "blue"},
+    {id: 3, name: "Elon Musk", partySize: 6, quoted: 15, createdAt: Date.now()- 1000*60*5, status: "orange"},
+    {id: 4, name: "Amara Grey Oxrud", partySize: 3, quoted: 10, createdAt: Date.now() - 1000*60*14, status: "red"}
   ]
 });
 

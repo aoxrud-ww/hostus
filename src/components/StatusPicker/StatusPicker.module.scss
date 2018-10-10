@@ -1,0 +1,24 @@
+.container {
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 80px;
+  margin: 0 1rem;
+}
+
+.shortcuts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.incrementIcons {
+  $size: 24px;
+  width: $size;
+  height: $size;
+}

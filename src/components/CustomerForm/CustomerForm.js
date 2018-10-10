@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import styles from './CustomerForm.module.scss';
 import Textfield from '../Textfield/Textfield.js';
 import PartySizePicker from '../PartySizePicker/PartySizePicker.js';
+import StatusPicker from '../StatusPicker/StatusPicker.js';
+import IncrementInput from '../IncrementInput/IncrementInput.js';
+
 
 class CustomerForm extends PureComponent {
 
@@ -12,12 +15,16 @@ class CustomerForm extends PureComponent {
       name: this.props.name,
       partySize: this.props.partySize,
       phone: this.props.phone,
-      note: this.props.note
+      note: this.props.note,
+      status: this.props.status,
+      quoted: this.props.quoted
     };
     this.changedName = this.changedAttribute.bind(this)('name');
     this.changedPhone = this.changedAttribute.bind(this)('phone');
     this.changedPartySize = this.changedAttribute.bind(this)('partySize');
     this.changedNote = this.changedAttribute.bind(this)('note');
+    this.changedStatus = this.changedAttribute.bind(this)('status');
+    this.changedQuotedWaitTime = this.changedAttribute.bind(this)('quoted');
   }
 
   changedAttribute(attributeName) {
@@ -45,7 +52,14 @@ class CustomerForm extends PureComponent {
         <div className={styles.row}>
           <Textfield value={this.props.note} onChange={this.changedNote}  label="Notes" placeholder="ie. Special requirements" />
         </div>
+        <div className={styles.row}>
+          <StatusPicker value={this.props.status} onChange={this.changedStatus} />
+        </div>
+        <div className={styles.row}>
+          <IncrementInput value={this.props.quoted} onChange={this.changedQuotedWaitTime} step={5} />
+        </div>
       </div>
+
     );
   }
 }
@@ -55,6 +69,7 @@ CustomerForm.defaultProps = {
   partySize: 1,
   phone: '',
   note: '',
+  quoted: 0,
   onChange: () => {}
 };
 
