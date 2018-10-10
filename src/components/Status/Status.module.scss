@@ -4,6 +4,25 @@
   width: $size;
   height: $size;
   border-radius: $size / 2;
-  background-color: #EBCEF9;
-  border: 1px solid #C15EE8;
+
+  &.purple {
+    background-color: #EBCEF9;
+    border: 1px solid #C15EE8;
+  }
+  &.red {
+    background-color: #e85e5e;
+    border: 1px solid #e85e84;
+  }
+  &.green {
+    background-color: #5ee862;
+    border: 1px solid #73e85e;
+  }
+  &.blue {
+    background-color: #5e75e8;
+    border: 1px solid #5e95e8;
+  }
+  &.orange {
+    background-color: #e89e5e;
+    border: 1px solid #e88b5e;
+  }
 }
