@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './PartySizePicker.module.scss';
 import Button from "../Button/Button.js";
 import IncrementInput from "../IncrementInput/IncrementInput.js";
+import Buttonbar from "../Buttonbar/Buttonbar.js";
 
 class PartySizePicker extends Component {
 
@@ -11,16 +12,19 @@ class PartySizePicker extends Component {
       value: this.props.value
     };
 
-    this.applyValue = this.applyValue.bind(this);
-    this.didChange = this.didChange.bind(this);
+    this.shortcutClicked = this.shortcutClicked.bind(this);
+    this.incrementChange = this.incrementChange.bind(this);
+  }
+
+  incrementChange(value) {
+    this.didChange(value);
   }
 
   didChange(value) {
-
     this.props.onChange(value);
   }
 
-  applyValue(e, buttonProps) {
+  shortcutClicked(e, buttonProps) {
     this.setState({
       value: buttonProps.data
     }, () => {
@@ -28,26 +32,24 @@ class PartySizePicker extends Component {
     });
   }
 
-  renderShortcuts() {
-    return (
-      <div className={styles.shortcuts}>
-        <Button theme="tertiary" onClick={this.applyValue} data={1}>1</Button>
-        <Button theme="tertiary" onClick={this.applyValue} data={2}>2</Button>
-        <Button theme="tertiary" onClick={this.applyValue} data={3}>3</Button>
-        <Button theme="tertiary" onClick={this.applyValue} data={4}>4</Button>
-        <Button theme="tertiary" onClick={this.applyValue} data={5}>5</Button>
-        <Button theme="tertiary" onClick={this.applyValue} data={6}>6</Button>
-      </div>
-    )
-  }
 
   render() {
     return (
       <div className={styles.container}>
         <div className={styles.inputContainer}>
-          <IncrementInput value={this.state.value} onChange={this.didChange} />
+          <IncrementInput value={this.state.value} onChange={this.incrementChange} />
         </div>
-        {this.renderShortcuts()}
+        {this.state.buttonbarValue}
+        <div className={styles.shortcuts}>
+          <Buttonbar value={this.state.buttonbarValue} updateSelected={false}>
+            <Button onClick={this.shortcutClicked} data={1}>1</Button>
+            <Button onClick={this.shortcutClicked} data={2}>2</Button>
+            <Button onClick={this.shortcutClicked} data={3}>3</Button>
+            <Button onClick={this.shortcutClicked} data={4}>4</Button>
+            <Button onClick={this.shortcutClicked} data={5}>5</Button>
+            <Button onClick={this.shortcutClicked} data={6}>6</Button>
+          </Buttonbar>
+        </div>
       </div>
     );
   }
