@@ -4,6 +4,7 @@ import Textfield from '../Textfield/Textfield.js';
 import PartySizePicker from '../PartySizePicker/PartySizePicker.js';
 import StatusPicker from '../StatusPicker/StatusPicker.js';
 import IncrementInput from '../IncrementInput/IncrementInput.js';
+import PartySizeWaitTimes from '../PartySizeWaitTimes/PartySizeWaitTimes.js';
 
 
 class CustomerForm extends PureComponent {
@@ -29,8 +30,8 @@ class CustomerForm extends PureComponent {
 
   changedAttribute(attributeName) {
     return (attributeValue) => {
-      this.setState(prevState => {
-        prevState[attributeName] = attributeValue;
+      this.setState({
+        [attributeName]: attributeValue
       }, () => {
         this.props.onChange(this.state);
       });
@@ -49,14 +50,17 @@ class CustomerForm extends PureComponent {
         <div className={styles.row}>
           <PartySizePicker onChange={this.changedPartySize} value={this.props.partySize}  />
         </div>
+        <hr />
+        <div className={styles.row}>
+          <IncrementInput value={this.props.quoted} onChange={this.changedQuotedWaitTime} step={5} label="Quoted Wait" suffix="min" allowZero={true} />
+          <PartySizeWaitTimes partySize={this.state.partySize} />
+        </div>
+        <hr />
         <div className={styles.row}>
           <Textfield value={this.props.note} onChange={this.changedNote}  label="Notes" placeholder="ie. Special requirements" />
         </div>
         <div className={styles.row}>
           <StatusPicker value={this.props.status} onChange={this.changedStatus} />
-        </div>
-        <div className={styles.row}>
-          <IncrementInput value={this.props.quoted} onChange={this.changedQuotedWaitTime} step={5} />
         </div>
       </div>
 
