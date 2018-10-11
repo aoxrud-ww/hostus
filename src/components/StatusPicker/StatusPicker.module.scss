@@ -1,24 +1,22 @@
 .container {
-}
-
-.inputContainer {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
+  background-color: rgba(0,0,0,.03);
+  border: 1px solid #EFEFEF;
 }
 
-.input {
-  width: 80px;
-  margin: 0 1rem;
+.status {
+  padding: 1rem;
+  flex-shrink: 0;
+  flex-grow: 1;
+  text-align: center;
+  padding-top: 1rem;
 }
 
-.shortcuts {
-  display: flex;
-  justify-content: space-between;
+.statusLabel {
+  display: block;
+  color: rgba(0,0,0,.6);
 }
 
-.incrementIcons {
-  $size: 24px;
-  width: $size;
-  height: $size;
+.selected {
+  background-color: white;
 }

@@ -12,34 +12,58 @@ class StatusPicker extends Component {
       value: this.props.value
     };
 
-    this.applyValue = this.applyValue.bind(this);
-    this.didChange = this.didChange.bind(this);
-    this.availableStatuses = ['red', 'green', 'blue', 'purple', 'orange']
+    this.setValue = this.setValue.bind(this);
+    this.availableStatuses = [
+
+      {
+        color: 'green',
+        label: "Bar"
+      },
+      {
+        color: 'blue',
+        label: "Outside"
+      },
+      {
+        color: 'purple',
+        label: "Table"
+      },
+      {
+        color: 'orange',
+        label: "Booth"
+      },
+      {
+        color: 'red',
+        label: "Inside"
+      }
+    ];
   }
 
-  didChange(value) {
-    this.setState({
-      value
-    });
-    this.props.onChange(value);
-  }
-
-  applyValue(e, buttonProps) {
-    this.setState({
-      value: buttonProps.data
-    }, () => {
-      this.didChange(buttonProps.data);
-    });
+  setValue(color) {
+    return () => {
+      this.setState({
+        value: color
+      }, () => {
+        this.props.onChange(this.state.value);
+      });
+    }
   }
 
   render() {
+
     return (
       <div className={styles.container}>
-        {this.availableStatuses.map(status => {
+        {this.availableStatuses.map(({color, label}) => {
+
+          const classNames = classnames({
+            [styles.status]: true,
+            [styles.selected]: color === this.state.value
+          });
+
           return (
-            <Button key={status} theme="tertiary" onClick={this.applyValue} data={status}>
-              <Status value={status} />
-            </Button>)
+            <div key={color} className={classNames} onClick={this.setValue(color)}>
+              <Status value={color} />
+              <span className={styles.statusLabel}>{label}</span>
+            </div>)
         })}
       </div>
     );
