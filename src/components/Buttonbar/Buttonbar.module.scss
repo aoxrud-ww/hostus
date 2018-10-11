@@ -1,7 +1,8 @@
 .buttonbar {
-  border: 1px solid #238AF8;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 15px;
   overflow: hidden;
+
 
   > *:first-child {
     border-left: 1px solid transparent;
