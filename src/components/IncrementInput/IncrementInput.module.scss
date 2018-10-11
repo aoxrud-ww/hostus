@@ -1,6 +1,15 @@
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+
+  &.hasSuffix {
+    .input {
+      margin-left: -25px;
+      padding-right: 35px;
+      margin-right: -30px;
+      text-align: right;
+    }
+  }
 }
 
 .input {
@@ -17,4 +26,25 @@
   $size: 24px;
   width: $size;
   height: $size;
+}
+
+.label {
+  margin-top: -10px;
+  display: block;
+  font-size: 14px;
+  color: rgba(0,0,0,.5);
+}
+
+.inputContainer {
+  text-align: center;
+}
+
+.suffix {
+  pointer-events: none;
+}
+
+hr {
+  border-color: rgba(0,0,0,0.05);
+  height: 1px;
+  border-top: 0;
 }

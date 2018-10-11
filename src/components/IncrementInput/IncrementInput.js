@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './IncrementInput.module.scss';
 import Button from "../Button/Button.js";
 import ReactSVG from 'react-svg';
 import iconPlus from '../../assets/add.svg';
 import iconMinus from '../../assets/subtract.svg';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-class IncrementInput extends Component {
+
+class IncrementInput extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,19 +49,27 @@ class IncrementInput extends Component {
 
   decrement() {
     const value = Number(this.inputRef.current.value) - this.props.step;
-    if(this.props.allowZero || value > 0) {
+    if((this.props.allowZero && value >= 0) || value > 0) {
       this.broadcastValue(value);
     }
   }
 
   render() {
+    const classNames = classnames({
+      [styles.container]: true,
+      [styles.hasSuffix]: !!this.props.suffix
+    });
     return (
-      <div className={styles.container}>
+      <div className={classNames}>
         <Button theme="icon" onClick={this.decrement}>
           <ReactSVG svgClassName={styles.incrementIcons} src={iconMinus} />
         </Button>
         <div className={styles.inputContainer}>
-          <input className={styles.input} value={this.state.value} onChange={this.didChange} ref={this.inputRef} />
+          <div>
+            <input className={styles.input} value={this.state.value} onChange={this.didChange} ref={this.inputRef} />
+            {this.props.suffix && <span className={styles.suffix}>{this.props.suffix}</span>}
+          </div>
+          <label className={styles.label}>{this.props.label}</label>
         </div>
         <Button theme="icon" onClick={this.increment}>
           <ReactSVG svgClassName={styles.incrementIcons} src={iconPlus} />
@@ -73,13 +83,15 @@ IncrementInput.propTypes = {
   value: PropTypes.number,
   step: PropTypes.number,
   allowZero: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  label: PropTypes.string
 };
 
 IncrementInput.defaultProps = {
   value: 1,
   step: 1,
   allowZero: false,
+  label: '',
   onChange: () => {}
 };
 
