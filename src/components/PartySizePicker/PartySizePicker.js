@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './PartySizePicker.module.scss';
 import Button from "../Button/Button.js";
 import IncrementInput from "../IncrementInput/IncrementInput.js";
 import Buttonbar from "../Buttonbar/Buttonbar.js";
 
-class PartySizePicker extends Component {
+class PartySizePicker extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -37,7 +37,7 @@ class PartySizePicker extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.inputContainer}>
-          <IncrementInput value={this.state.value} onChange={this.incrementChange} />
+          <IncrementInput value={this.state.value} onChange={this.incrementChange} label="Party Size" />
         </div>
         {this.state.buttonbarValue}
         <div className={styles.shortcuts}>
