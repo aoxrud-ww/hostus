@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './SearchInput.module.scss';
 import searchLoupe from '../../assets/search.svg';
 import classnames from 'classnames';
 import ReactSVG from 'react-svg';
 
-class SearchInput extends Component {
+class SearchInput extends PureComponent {
 
   constructor(props) {
     super(props);
-
+    this.inputRef = React.createRef();
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
     this.state = {
       isFocused: false
     };
+  }
+
+  componentDidMount() {
+    if(this.props.autofocus) {
+      this.inputRef.current.focus();
+    }
   }
 
   onFocus() {
@@ -45,13 +51,15 @@ class SearchInput extends Component {
         <div className={styles.iconContainer}>
           <ReactSVG src={searchLoupe} svgClassName={styles.icon} />
         </div>
-        <input type='search' placeholder={this.props.placeholder} onChange={this.onChange} className={styles.input} onFocus={this.onFocus} onBlur={this.onBlur} />
+        <input ref={this.inputRef} type='search' placeholder={this.props.placeholder} onChange={this.onChange} className={styles.input} onFocus={this.onFocus} onBlur={this.onBlur} />
       </div>
     );
   }
 }
 
 SearchInput.defaultProps = {
-  placeholder: "Search..."
+  placeholder: "Search...",
+  autofocus: false,
+  onChange: () => {}
 }
 export default SearchInput;
