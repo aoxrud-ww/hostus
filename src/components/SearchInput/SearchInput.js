@@ -51,7 +51,7 @@ class SearchInput extends PureComponent {
         <div className={styles.iconContainer}>
           <ReactSVG src={searchLoupe} svgClassName={styles.icon} />
         </div>
-        <input ref={this.inputRef} type='search' placeholder={this.props.placeholder} onChange={this.onChange} className={styles.input} onFocus={this.onFocus} onBlur={this.onBlur} />
+        <input ref={this.inputRef} value={this.props.value} type='search' placeholder={this.props.placeholder} onChange={this.onChange} className={styles.input} onFocus={this.onFocus} onBlur={this.onBlur} />
       </div>
     );
   }
@@ -60,6 +60,7 @@ class SearchInput extends PureComponent {
 SearchInput.defaultProps = {
   placeholder: "Search...",
   autofocus: false,
+  value: '',
   onChange: () => {}
 }
 export default SearchInput;
