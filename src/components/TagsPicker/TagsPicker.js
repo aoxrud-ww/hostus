@@ -1,89 +1,114 @@
-import React, { Component, cloneElement } from 'react';
+import React, { Component, cloneElement, PureComponent } from 'react';
 import styles from './TagsPicker.module.scss';
-import Button from '../Button/Button.js';
 import SearchInput from '../SearchInput/SearchInput.js';
-
-import Status from '../Status/Status.js';
 import cx from 'classnames';
 import addIcon from '../../assets/add.svg';
 import checkmarkIcon from '../../assets/check-mark.svg';
-
 import ReactSVG from 'react-svg';
+import { connect } from "react-redux";
 
-class Tag extends Component {
+class Tag extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.toggleActiveState = this.toggleActiveState.bind(this);
+  }
+
+  toggleActiveState(e) {
+    e.preventDefault();
+    this.props.onToggle(!this.props.isActive);
+  }
+
   render() {
     const classNames = cx(styles.tag, {
-      [styles.selected]: this.props.active
+      [styles.selected]: this.props.isActive
     });
 
     return (
-      <div className={classNames}>
-        {this.props.children}
-      </div>
+      <a href='#' onClick={this.toggleActiveState}>
+        <div className={classNames}>
+          {this.props.children}
+        </div>
+      </a>
     )
   }
 }
+
+Tag.defaultProps = {
+  isActive: false,
+  onToggle: () => {}
+};
+
+
+
+class TagsList extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  toggleTag(tag, isActive) {
+    console.log('this.props.selected', this.props.selected);
+    this.props.onChange({
+      ...this.props.selected,
+      [tag.label]: isActive
+    });
+    console.log('tags list is about to broadcast', {
+      ...this.props.selected,
+      [tag.label]: isActive
+    });
+  }
+
+  render() {
+    return (
+      <div className={styles.container}>
+        {this.props.tags.map(tag => (
+          <Tag key={tag.label} isActive={this.props.selected[tag.label]} onToggle={this.toggleTag.bind(this, tag)}>
+            {tag.label}
+          </Tag>
+        ))}
+      </div>
+    );
+  }
+}
+
+TagsList.defaultProps = {
+  onChange: () => {}
+}
+
+
+
 
 class TagsPicker extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value,
+      tags: this.props.tags,
       selected: {}
     };
 
-    this.tagsAdded = this.tagsAdded.bind(this);
-    this.tags = [
-      {
-        label: "Bar"
-      },
-      {
-        label: "Outside",
-        isActive: true
-      },
-      {
-        label: "Table"
-      },
-      {
-        label: "Booth"
-      },
-      {
-        label: "Inside"
-      }
-    ];
+    this.updatedTags = this.updatedTags.bind(this);
+    this.updateSelected = this.updateSelected.bind(this);
   }
 
-  toggleTag(tag, e) {
-    e.preventDefault();
-    const isSelected = this.state.selected[tag.label];
+  updatedTags(selected, tags) {
+    this.updateSelected(selected);
 
-    this.setState({
-      selected: {
-        ...this.state.selected,
-        [tag.label]: !isSelected
-      }
-    }, () => {
-      this.props.onChange(Object.keys(this.state.selected))
-    });
+    if(tags) {
+      this.setState({ tags });
+    }
   }
 
-  tagsAdded(tagsAdded) {
-    console.log('clicked', tagsAdded);
+  updateSelected(selected) {
+    this.setState({ selected });
   }
 
   render() {
-
     return (
       <div className={styles.container}>
-        {this.tags.map(tag => {
-          return (
-            <a key={tag.label} href='#' onClick={this.toggleTag.bind(this, tag)}>
-              <Tag active={this.state.selected[tag.label]}>{tag.label}</Tag>
-            </a>)
-        })}
 
-        <PopoutSearch onSelect={this.tagsAdded} options={this.tags}>
+        <TagsList tags={this.state.tags} selected={this.state.selected} onChange={this.updateSelected}/>
+
+        <PopoutSearch options={this.state.tags} selected={this.state.selected} onChange={this.updatedTags}>
           <Tag>
             <div className={styles.inlineButton}>
               <ReactSVG src={addIcon} svgClassName={styles.addIcon} /> Add
@@ -95,6 +120,7 @@ class TagsPicker extends Component {
     );
   }
 }
+
 
 class AddToList extends Component {
   render() {
@@ -110,72 +136,145 @@ class AddToList extends Component {
 
 
 
-class PopoutSearch extends Component {
+class PopoutSearch extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.addTag = this.addTag.bind(this);
+    this.togglePopout = this.togglePopout.bind(this);
     this.searchList = this.searchList.bind(this);
     this.addAndSelect = this.addAndSelect.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+    this.toggleFocus = this.toggleFocus.bind(this);
     this.state = {
       query: '',
-      options: this.props.options,
-      visible: true
+      visible: true,
+      touched: false,
+      customOptions: []
     };
   }
 
   searchList(query) {
     this.setState({
       query
-    })
-    console.log(query);
+    });
   }
 
   filterList(query) {
     let list;
+    const options = this.getAllOptions();
     if(query) {
       const normalizedQuery = query.toLowerCase();
-      list = this.findInList(this.state.options, normalizedQuery);
+      list = this.findInList(options, normalizedQuery);
     } else {
-      list = this.state.options;
+      list = options;
     }
     return list;
   }
 
   findInList(list, query) {
-    return this.state.options.filter(option => option.label.toLowerCase().includes(query));
+    return this.props.options.filter(option => option.label.toLowerCase().includes(query));
   }
 
   sortListBySelected(list) {
     return list.sort((a, b) => {
-      if(a.isSelected || b.isSelected) return 1;
+      if(a.isActive || b.isActive) return 1;
       return -1;
     })
   }
 
-  addTag(e) {
+  togglePopout(e) {
     e.preventDefault();
     this.setState({
       visible: !this.state.visible
     });
   }
 
-  addAndSelect(e) {
-    this.setState({
+  addAndSelect(text) {
+    const option = {label: text, isActive: true};
+    this.setState(state => ({
       query: '',
-      options: [...this.state.options, {label: e, isSelected: true}]
+      focusOn: option
+    }), () => {
+      const selected = {
+        ...this.props.selected,
+        [option.label]: option.isActive
+      };
+      const tags = [
+        option,
+        ...this.props.options
+      ];
+      this.stopCloseTimer();
+
+      this.props.onChange(selected, tags);
     });
   }
 
-  selectOption(option) {
+  selectOption(option, e) {
+    if(e) {
+      e.preventDefault();
+    }
+
+    const selected = {
+      ...this.props.selected,
+      [option.label]: !this.props.selected[option.label]
+    };
+
+    this.props.onChange(selected);
+  }
+
+  onFocus() {
+    this.toggleFocus(true);
+  }
+
+  onBlur() {
+    this.toggleFocus(false);
+  }
+
+  toggleFocus(isFocused) {
+    if(isFocused) {
+      this.stopCloseTimer();
+    } else {
+      this.startCloseTimer();
+    }
+  }
+
+  startCloseTimer() {
+    this.stopCloseTimer();
+
+    const closeTimer = setTimeout(() => {
+      this.setState({
+        visible: false
+      });
+    }, this.props.autocloseDelay);
+
     this.setState({
-      options: this.state.options.map(_option => {
-        if(option === _option) {
-          _option.isSelected = !_option.isSelected;
-        }
-        return _option;
-      })
-    })
+      closeTimer
+    });
+  }
+
+  broadcastSelectedOptions() {
+    if(this.state.touched) {
+      const selected = this.getSelectedOptions();
+      this.props.onChange(selected);
+    }
+  }
+
+  getAllOptions() {
+    return [...this.state.customOptions, ...this.props.options];
+  }
+
+  getSelectedOptions() {
+    const options = this.getAllOptions();
+    return options
+      .map(option => {
+        option.isActive = !!this.props.selected[option.label];
+        return option;
+      });
+  }
+
+  stopCloseTimer() {
+    clearTimeout(this.state.closeTimer);
   }
 
   popout() {
@@ -188,15 +287,16 @@ class PopoutSearch extends Component {
     return (
       <div className={styles.popout}>
         <div className={styles.popoutHeader}>
-          <SearchInput value={this.state.query} onChange={this.searchList} autofocus={true} />
+          <SearchInput value={this.state.query} onChange={this.searchList} autofocus={true} onFocusChange={this.toggleFocus} />
         </div>
         <ul className={styles.popoutList}>
           {options.map(option => {
             return (
               <li key={option.label}>
-                <a href='#' className={styles.popoutListItem} onClick={this.selectOption.bind(this, option)}>
-                  {option.isSelected && <div className={styles.iconContainer}><ReactSVG src={checkmarkIcon} svgClassName={styles.checkmarkIcon} /></div>}
-                {option.label}</a>
+                <a href='#' className={styles.popoutListItem} onClick={this.selectOption.bind(this, option)} onFocus={this.onFocus} onBlur={this.onBlur}>
+                  {this.props.selected[option.label] && <div className={styles.iconContainer}><ReactSVG src={checkmarkIcon} svgClassName={styles.checkmarkIcon} /></div>}
+                  {option.label}
+                </a>
               </li>
             )
           })}
@@ -210,7 +310,7 @@ class PopoutSearch extends Component {
   render() {
     return (
       <div className={styles.addTag}>
-        <a href='#' onClick={this.addTag}>
+        <a href='#' onClick={this.togglePopout}>
           {cloneElement(this.props.children, {active: this.state.visible})}
         </a>
         {this.popout()}
@@ -221,13 +321,21 @@ class PopoutSearch extends Component {
 
 
 PopoutSearch.defaultProps = {
-  options: []
+  options: [],
+  autocloseDelay: 500
 };
 
 TagsPicker.defaultProps = {
-  value: 1,
+  value: [],
   onChange: () => {}
 };
 
-export default TagsPicker;
+
+const mapStateToProps = state => ({
+  tags: state.frequentlyUsedTags
+});
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TagsPicker);
 

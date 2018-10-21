@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styles from './CustomerForm.module.scss';
 import Textfield from '../Textfield/Textfield.js';
 import PartySizePicker from '../PartySizePicker/PartySizePicker.js';
-import StatusPicker from '../StatusPicker/StatusPicker.js';
+import TagsPicker from '../TagsPicker/TagsPicker.js';
 import IncrementInput from '../IncrementInput/IncrementInput.js';
 import PartySizeWaitTimes from '../PartySizeWaitTimes/PartySizeWaitTimes.js';
 
@@ -60,7 +60,7 @@ class CustomerForm extends PureComponent {
           <Textfield value={this.props.note} onChange={this.changedNote}  label="Notes" placeholder="ie. Special requirements" />
         </div>
         <div className={styles.row}>
-          <StatusPicker value={this.props.status} onChange={this.changedStatus} />
+          <TagsPicker value={this.props.tags} onChange={this.changedStatus} />
         </div>
       </div>
 

@@ -27,12 +27,14 @@ class SearchInput extends PureComponent {
     this.setState({
       isFocused: true
     });
+    this.props.onFocusChange(true);
   }
 
   onBlur() {
     this.setState({
       isFocused: false
     });
+    this.props.onFocusChange(false);
   }
 
   onChange(e) {
@@ -61,6 +63,7 @@ SearchInput.defaultProps = {
   placeholder: "Search...",
   autofocus: false,
   value: '',
-  onChange: () => {}
+  onChange: () => {},
+  onFocusChange: () => {}
 }
 export default SearchInput;
