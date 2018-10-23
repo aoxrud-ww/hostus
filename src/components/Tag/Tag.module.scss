@@ -1,0 +1,32 @@
+$text-color: #727272;
+$text-color-active: #ffffff;
+$background-color-active: #103F55;
+
+.container {
+  border: none;
+  background-color: transparent;
+  border-radius: 15px;
+
+  &:focus {
+    outline: none;
+  }
+}
+.tag {
+  font-size: 16px;
+  color: $text-color;
+  padding: .3rem .9rem;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 15px;
+  margin: 0.2rem;
+
+  &.selected, &:focus {
+    color: $text-color-active;
+    background-color: $background-color-active;
+
+    svg {
+      fill: $text-color-active;
+    }
+  }
+
+
+}

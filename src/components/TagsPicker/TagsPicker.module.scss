@@ -3,26 +3,10 @@ $text-color-active: #ffffff;
 
 $background-color-active: #103F55;
 
-.container {
-  display: flex;
-}
 
-.tag {
-  font-size: 16px;
-  color: $text-color;
-  padding: .3rem .9rem;
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 15px;
-  margin: 0.2rem;
 
-  &.selected, &:focus {
-    color: $text-color-active;
-    background-color: $background-color-active;
-
-    .addIcon {
-      fill: $text-color-active;
-    }
-  }
+.selected .addIcon {
+  fill: $text-color-active;
 }
 
 .addIcon {
@@ -36,61 +20,5 @@ $background-color-active: #103F55;
 .inlineButton {
   display: flex;
   align-items: center;
-}
-
-
-.popout {
-  position: absolute;
-  width: 250px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 5px;
-  overflow: hidden;
-  margin-left: 0.3rem;
-}
-
-.popoutHeader {
-  padding: 0.4rem 1rem;
-  background-color: #103F55;
-  border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-.popoutList {
-  width: 100%;
-  background-color: #fff;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-
-.popoutListItem, .popoutListItemSelected {
-  display: block;
-  padding: 0.3rem 1rem;
-}
-
-.popoutListItem {
-  color: #727272;
-
-  &:focus, &:hover {
-    background-color: #2F66D6;
-    color: #fff;
-
-    svg {
-      fill: #fff;
-    }
-  }
-}
-
-
-.iconContainer {
-  display: inline-block;
-  vertical-align: center;
-}
-
-.checkmarkIcon {
-  $size: 16px;
-  height: $size;
-  width: $size;
-  fill: green;
 }
 
