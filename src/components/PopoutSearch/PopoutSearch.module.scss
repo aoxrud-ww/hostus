@@ -1,93 +1,25 @@
 .popout {
   position: absolute;
-  width: 250px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 5px;
-  overflow: hidden;
+  margin-top: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   margin-left: 0.3rem;
   z-index: 10;
+}
+
+.content {
+  width: 250px;
   background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.popoutHeader {
-  padding: 0.5rem 1rem;
-  background-color: rgba(0,0,0,0.1);
-  border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-.popoutList {
-  width: 100%;
-  background-color: #fff;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-
-.popoutListItem {
-  display: block;
-  padding: 0.3rem 0;
-  background-color: transparent;
-  border: 0;
-  width: 100%;
-  text-align: left;
-  font-size: 16px;
-}
-
-.popoutListItem {
-  color: #727272;
-
-  &:focus, &:hover {
-    background-color: #2F66D6;
-    color: #fff;
-
-    svg {
-      fill: #fff;
-    }
-  }
-}
-
-.iconContainer {
-  display: inline-block;
-  vertical-align: center;
-  width: 40px;
-  text-align: center;
-}
-
-.checkmarkIcon, .checkmarkIconSelected {
-  $size: 16px;
-  height: $size;
-  width: $size;
-  fill: rgba(0,0,0,0.1);
-}
-.checkmarkIconSelected {
-  fill: green;
-}
-
-
-.notFoundContainer {
-  padding: 1rem;
-  text-align: center;
-}
-
-
-.notFoundHeading {
-  margin: 0;
-
-  color: #444;
-  font-size: 18px;
-}
-
-.notFoundMessage {
-  margin: 0.5rem 0;
-  color: #767676;
-}
-
-.createButton {
-  margin-top: 0.5rem;
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  color: #238AF8;
-  cursor: pointer;
+.arrow {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  position: absolute;
+  top: -7px;
+  left: 11px;
+  background-color: #E5E5E5;
+  transform: rotate(45deg);
 }

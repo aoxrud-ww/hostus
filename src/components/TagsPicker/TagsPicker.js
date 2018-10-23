@@ -33,22 +33,19 @@ class TagsPicker extends PureComponent {
     this.setState({ selected });
   }
 
-  addTagButton() {
-    return (
-      <Tag>
-        <div className={styles.inlineButton}>
-          <ReactSVG src={addIcon} svgClassName={styles.addIcon} /> Add
-        </div>
-      </Tag>
-    );
-  }
-
   render() {
     return (
       <div className={styles.container}>
         <TagsList tags={this.state.tags} selected={this.state.selected} onChange={this.updateSelected}>
-          <PopoutSearch options={this.state.tags} selected={this.state.selected} onChange={this.updatedTags}>
-            {this.addTagButton()}
+          <PopoutSearch list={this.state.tags} selected={this.state.selected} onChange={this.updatedTags}>
+            <Tag>
+              <div className={styles.inlineButton}>
+                <div className={styles.iconContainer}>
+                  <ReactSVG src={addIcon} svgClassName={styles.addIcon} />
+                </div>
+                Add
+              </div>
+            </Tag>
           </PopoutSearch>
         </TagsList>
       </div>
@@ -57,12 +54,12 @@ class TagsPicker extends PureComponent {
 }
 
 TagsPicker.defaultProps = {
-  value: [],
+  tags: [],
   onChange: () => {}
 };
 
 TagsPicker.propTypes = {
-  value: PropTypes.array,
+  tags: PropTypes.array,
   onChange: PropTypes.func
 };
 

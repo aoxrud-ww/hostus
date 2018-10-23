@@ -14,7 +14,6 @@ $background-color-active: #103F55;
   width: $size;
   height: $size;
   fill: $text-color;
-  margin-right: 0.3rem;
 }
 
 .inlineButton {
@@ -22,3 +21,10 @@ $background-color-active: #103F55;
   align-items: center;
 }
 
+.iconContainer {
+  $size: 15px;
+  width: $size;
+  height: $size;
+  margin-right: 0.3rem;
+
+}

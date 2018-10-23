@@ -1,0 +1,55 @@
+.list {
+  width: 100%;
+  background-color: #fff;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.item {
+  display: block;
+  padding: 0.3rem 0;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  color: #727272;
+  cursor: pointer;
+
+  &:focus, &:hover {
+    background-color: #2F66D6;
+    color: #fff;
+    outline: none;
+  }
+
+  &.selected {
+    &:focus, &:hover {
+      svg {
+        fill: white !important;
+      }
+    }
+
+    svg {
+      fill: green;
+    }
+  }
+}
+
+.iconContainer {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}
+
+.checkmarkIcon, .checkmarkIconSelected {
+  $size: 16px;
+  height: $size;
+  width: $size;
+  fill: rgba(0,0,0,0.1);
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.checkmarkIconSelected {
+  fill: green;
+}
