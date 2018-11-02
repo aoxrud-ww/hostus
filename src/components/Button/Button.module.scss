@@ -1,9 +1,9 @@
 .button {
   padding: 0.2rem 1rem;
-  border: 1px solid #238AF8;
+  border: 1px solid #B534E2;
   border-radius: 5px;
   font-size: 16px;
-  color: #238AF8;
+  color: #B534E2;
   position: relative;
   cursor: pointer;
 
@@ -14,7 +14,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border: 1px solid #238AF8;
+    border: 1px solid #B534E2;
     border-radius: 3px;
     opacity: 0;
   }
@@ -31,7 +31,7 @@
   }
 
   &.primary {
-    min-width: 140px;
+    min-width: 100px;
   }
 
   &.page-header {

@@ -8,7 +8,7 @@ class TagsList extends PureComponent {
   toggleTag(tag, isActive) {
     this.props.onChange({
       ...this.props.selected,
-      [tag.label]: isActive
+      [tag]: isActive
     });
   }
 
@@ -16,8 +16,8 @@ class TagsList extends PureComponent {
     return (
       <div className={styles.container}>
         {this.props.tags.map(tag => (
-          <Tag key={tag.label} isActive={this.props.selected[tag.label]} onToggle={this.toggleTag.bind(this, tag)}>
-            {tag.label}
+          <Tag key={tag} isActive={this.props.selected[tag]} onToggle={this.toggleTag.bind(this, tag)}>
+            {tag}
           </Tag>
         ))}
         {this.props.children}
@@ -27,10 +27,14 @@ class TagsList extends PureComponent {
 }
 
 TagsList.defaultProps = {
+  tags: [],
+  selected: {},
   onChange: () => {}
 };
 
 TagsList.propTypes = {
+  tags: PropTypes.array,
+  selected: PropTypes.object,
   onChange: PropTypes.func.isRequired
 };
 

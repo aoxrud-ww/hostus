@@ -67,7 +67,8 @@ class Textfield extends PureComponent {
       [styles.container]: true,
       [styles.nonEmpty]: this.state.hasContent,
       [styles.empty]: !this.state.hasContent,
-      [styles.focused]: this.state.isFocused
+      [styles.focused]: this.state.isFocused,
+      [styles.underline]: this.props.underline
     });
 
     return (
@@ -90,7 +91,8 @@ class Textfield extends PureComponent {
 
 Textfield.defaultProps = {
   placeholder: '',
-  type: 'text'
+  type: 'text',
+  underline: true
 };
 
 export default Textfield;

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import styles from './Buttonbar.module.scss';
 import Button from '../Button/Button.js';
+import PropTypes from 'prop-types';
 
 class Buttonbar extends PureComponent {
   constructor(props) {
@@ -51,8 +52,14 @@ class Buttonbar extends PureComponent {
 }
 
 Buttonbar.defaultProps = {
-  updateSelected: true
+  updateSelected: true,
+  value: ''
 }
+
+Buttonbar.propTypes = {
+  updateSelected: PropTypes.bool,
+  value: PropTypes.string
+};
 
 
 export default Buttonbar;

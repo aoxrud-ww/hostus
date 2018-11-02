@@ -4,8 +4,6 @@ import SearchInput from '../SearchInput/SearchInput.js';
 import CheckList from '../CheckList/CheckList.js';
 import PropTypes from 'prop-types';
 
-
-
 class AddToList extends PureComponent {
   render() {
     return (
@@ -67,19 +65,18 @@ class SearchableCheckList extends PureComponent {
   }
 
   findInList(list, query) {
-    return this.props.list.filter(option => option.label.toLowerCase().includes(query));
+    return this.props.list.filter(option => option.toLowerCase().includes(query));
   }
 
 
-  addAndSelect(text) {
-    const option = {label: text, isActive: true};
+  addAndSelect(option) {
     this.setState(state => ({
       query: '',
       focusOn: option,
     }), () => {
       const selected = {
         ...this.props.selected,
-        [option.label]: option.isActive
+        [option]: true
       };
       const tags = [
         option,

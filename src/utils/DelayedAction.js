@@ -15,6 +15,8 @@ export default class DelayedAction {
   start() {
     this.onTick(this.step);
 
+
+
     this.timer = setTimeout(() => {
       if(this.step > 0) {
         this.step--;

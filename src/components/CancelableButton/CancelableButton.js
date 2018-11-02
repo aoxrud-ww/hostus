@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import DelayedAction from '../../utils/DelayedAction.js';
 import Button from '../Button/Button.js';
-
+import PropTypes from 'prop-types';
+import ProgressionCircle from './ProgressionCircle.js';
 
 class CancelableButton extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class CancelableButton extends Component {
 
     this.delayedAction = new DelayedAction({
       delay: 500,
+      step: 3,
       cleanupOnAction: this.props.shouldCleanup,
       onAction: () => {
         this.props.trigger();
@@ -45,7 +47,6 @@ class CancelableButton extends Component {
         }), () => this.props.onStatus(this.state));
       },
       onCleanup: () => {
-
         this.setState(state => ({
           isExecuting: false,
           didCancel: false
@@ -55,13 +56,11 @@ class CancelableButton extends Component {
   }
 
   render() {
-    const countdown = (this.props.template || '').replace('{countdown}', this.state.countdown);
-
     return (
       <Button theme='primary' onClick={this.click} disabled={this.state.didCancel}>
         {!this.state.isExecuting && this.props.children}
-        {this.state.isExecuting && !this.state.didCancel ? countdown : ''}
-        {this.state.isExecuting && this.state.didCancel && "Canceled"}
+        {this.state.isExecuting && !this.state.didCancel ? <ProgressionCircle strokeColor="#B534E2" duration={2000} /> : ''}
+        {this.state.isExecuting && this.state.didCancel && this.props.children}
       </Button>
     );
   }
@@ -69,6 +68,12 @@ class CancelableButton extends Component {
 
 CancelableButton.defaultProps = {
   shouldCleanup: true
+}
+
+CancelableButton.propTypes = {
+  shouldCleanup: PropTypes.bool,
+  onStatus: PropTypes.func,
+  trigger: PropTypes.func
 }
 
 export default CancelableButton;

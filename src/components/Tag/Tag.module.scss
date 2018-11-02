@@ -19,6 +19,7 @@ $background-color-active: #103F55;
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 15px;
   margin: 0.2rem;
+  display: inline-block;
 
   &.selected, &:focus {
     color: $text-color-active;
@@ -29,5 +30,17 @@ $background-color-active: #103F55;
     }
   }
 
+  &.compact {
+    padding: 0.2rem .4rem;
+    font-size: 12px;
+    border-radius: 5px;
+  }
 
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }

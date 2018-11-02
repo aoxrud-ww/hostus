@@ -14,9 +14,8 @@ class CheckList extends PureComponent {
 
     const selected = {
       ...this.props.selected,
-      [option.label]: !this.props.selected[option.label]
+      [option]: !this.props.selected[option]
     };
-
     this.props.onChange(selected);
   }
 
@@ -38,13 +37,13 @@ class CheckList extends PureComponent {
 
           const btnClassNames = cx({
             [styles.item]: true,
-            [styles.selected]: !!this.props.selected[item.label]
+            [styles.selected]: !!this.props.selected[item]
           });
 
-          const checkmarkClass = this.props.selected[item.label] ? styles.checkmarkIconSelected : styles.checkmarkIcon;
+          const checkmarkClass = this.props.selected[item] ? styles.checkmarkIconSelected : styles.checkmarkIcon;
 
           return (
-            <li key={item.label}>
+            <li key={item}>
               <button className={btnClassNames}
                 onClick={this.selectOption.bind(this, item)}
                 onFocus={this.focusChange.bind(this, item, true)}
@@ -53,7 +52,7 @@ class CheckList extends PureComponent {
                 <div className={styles.iconContainer}>
                   <ReactSVG src={checkmarkIcon} svgClassName={checkmarkClass} />
                 </div>
-                <span className={styles.label}>{item.label}</span>
+                <span className={styles}>{item}</span>
               </button>
             </li>
           )

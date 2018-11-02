@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Button.module.scss';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 class Button extends Component {
 
@@ -30,8 +31,13 @@ class Button extends Component {
 
 export default Button;
 
-
 Button.defaultProps = {
   theme: 'primary',
   disabled: false
+};
+
+Button.propTypes = {
+  theme: PropTypes.string,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func
 };

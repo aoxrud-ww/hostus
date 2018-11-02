@@ -1,0 +1,36 @@
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.heading {
+  display: flex;
+  padding: 0.5rem 2rem;
+  color: #238AF8;
+  position: sticky;
+  top: 0;
+}
+
+.stats {
+  margin-bottom: 1rem;
+}
+
+.sidebar {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.waitlist {
+  margin-top: 1rem;
+  flex-grow: 2;
+  width: 80%;
+}
+

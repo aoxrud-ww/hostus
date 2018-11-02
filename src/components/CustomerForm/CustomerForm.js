@@ -5,7 +5,7 @@ import PartySizePicker from '../PartySizePicker/PartySizePicker.js';
 import TagsPicker from '../TagsPicker/TagsPicker.js';
 import IncrementInput from '../IncrementInput/IncrementInput.js';
 import PartySizeWaitTimes from '../PartySizeWaitTimes/PartySizeWaitTimes.js';
-
+import PropTypes from 'prop-types';
 
 class CustomerForm extends PureComponent {
 
@@ -24,18 +24,25 @@ class CustomerForm extends PureComponent {
     this.changedPhone = this.changedAttribute.bind(this)('phone');
     this.changedPartySize = this.changedAttribute.bind(this)('partySize');
     this.changedNote = this.changedAttribute.bind(this)('note');
-    this.changedStatus = this.changedAttribute.bind(this)('status');
+    this.changedStatus = this.changedAttribute.bind(this)('tags');
     this.changedQuotedWaitTime = this.changedAttribute.bind(this)('quoted');
   }
 
   changedAttribute(attributeName) {
     return (attributeValue) => {
       this.setState({
-        [attributeName]: attributeValue
+        [attributeName]: this.transformValue(attributeName, attributeValue)
       }, () => {
         this.props.onChange(this.state);
       });
     }
+  }
+
+  transformValue(name, value) {
+    if(name === 'tags') {
+      value = Object.keys(value).filter(tag => value[tag] === true);
+    }
+    return value;
   }
 
   render() {
@@ -57,7 +64,7 @@ class CustomerForm extends PureComponent {
         </div>
         <hr />
         <div className={styles.row}>
-          <Textfield value={this.props.note} onChange={this.changedNote}  label="Notes" placeholder="ie. Special requirements" />
+          <Textfield value={this.props.note} onChange={this.changedNote} label="Notes" placeholder="ie. Special requirements" underline={false} />
         </div>
         <div className={styles.row}>
           <TagsPicker value={this.props.tags} onChange={this.changedStatus} />
@@ -73,9 +80,17 @@ CustomerForm.defaultProps = {
   partySize: 1,
   phone: '',
   note: '',
-  quoted: 0,
-  onChange: () => {}
-};
+  quoted: 0
+}
+
+CustomerForm.propTypes = {
+  name: PropTypes.string,
+  partySize: PropTypes.number,
+  phone: PropTypes.string,
+  note: PropTypes.string,
+  quoted: PropTypes.number,
+  onChange: PropTypes.func.isRequired
+}
 
 
 export default CustomerForm;

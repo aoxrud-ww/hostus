@@ -1,12 +1,14 @@
 .heading {
   display: flex;
-  padding: 0.5rem 2rem;
   color: rgba(0,0,0,.5);
   position: sticky;
   top: 0;
   border-bottom: 2px solid #E7EEF9;
   font-size: 12px;
   letter-spacing: 1px;
+  padding: 0.5rem 1rem .1rem 1rem;
+  background-color: #ffffff;
+  z-index:1;
 }
 
 .name {
@@ -15,17 +17,12 @@
 
 .partySize {
   flex-shrink: 0;
-  width: 80px;
-  text-align: center;
-}
-
-.waiting, .quoted {
-  flex-shrink: 0;
-  width: 100px;
-}
-
-.status {
-  flex-shrink: 0;
   width: 40px;
-  text-align: center;
+  flex-grow: 0;
 }
+
+.waiting {
+  flex-shrink: 0;
+  width: 50px;
+}
+

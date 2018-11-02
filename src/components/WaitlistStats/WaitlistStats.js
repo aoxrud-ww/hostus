@@ -1,67 +1,69 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './WaitlistStats.module.scss';
 import { connect } from "react-redux";
+import Duration from "../Duration/Duration.js";
+import ReactSVG from 'react-svg';
+import userIcon from '../../assets/user-alt.svg';
 
-class WaitlistStats extends Component {
 
+class WaitTimesBySize extends PureComponent {
   render() {
     return (
-      <div className={styles.container}>
-        <ul className={styles.metricList}>
-          <li className={styles.metric}>
-            <div className={styles.value}>
-              {this.props.list.length}
-            </div>
-            <div className={styles.label}>Waiting</div>
-          </li>
+      <div className={styles.metric}>
+        <Duration value={this.props.value} unit="min" size="large" />
 
-          <li className={styles.metric}>
-            <div className={styles.value}>
-              10
-            </div>
-            <div className={styles.label}>Served People</div>
-          </li>
+        <div className={styles.label}>
+          <div className={styles.iconContainer}>
+            <ReactSVG src={userIcon} svgClassName={styles.icon} />
+          </div>
+          {this.props.label}
+        </div>
+      </div>
+    )
+  }
+}
 
-          <li className={styles.metric}>
-            <div className={styles.value}>
-              8
-            </div>
-            <div className={styles.label}>Served Groups</div>
-          </li>
+class WaitlistStats extends PureComponent {
+  render() {
+    const stats = [
+      {label: "Parties in waitlist", value: this.props.list.length},
+      {label: "Called parties", value: this.props.list.length},
+      {label: "Served parties", value: this.props.list.length},
+    ];
 
+    return (
+      <div className='card'>
+        <h1 className={styles.primaryHeadline}>Waitlist</h1>
+        <ul className={styles.waitTimesList}>
+          {this.props.waitTimes.map(metric => (
+            <li key={metric.label} className={styles.waitTimeItem}>
+              <WaitTimesBySize value={metric.value} label={metric.label} />
+            </li>
+          ))}
+        </ul>
 
-
-          <li className={styles.metric}>
-            <div className={styles.value}>
-              0<span className={styles.minorLabel}>min</span>
-            </div>
-            <div className={styles.label}>Wait 1-4</div>
-          </li>
-
-          <li className={styles.metric}>
-            <div className={styles.value}>
-              5<span className={styles.minorLabel}>min</span>
-            </div>
-            <div className={styles.label}>Wait 5-6</div>
-          </li>
-
-
-          <li className={styles.metric}>
-            <div className={styles.value}>
-              5<span className={styles.minorLabel}>min</span>
-            </div>
-            <div className={styles.label}>Wait 7+</div>
-          </li>
-
+        <h1 className={styles.secondaryHeadline}>Statistics</h1>
+        <ul className={styles.stats}>
+          {stats.map(metric => (
+            <li key={metric.label} className={styles.statsItem}>
+              <span className={styles.statsLabel}>{metric.label}</span>
+              <span className={styles.statsValue}>{metric.value}</span>
+            </li>
+          ))}
         </ul>
       </div>
     );
+
+
   }
 }
 
 
 const mapStateToProps = state => {
-  return { list: state.list };
+  return {
+    list: state.list,
+    waitTimes: state.waitTimes
+  };
 };
 
 export default connect(mapStateToProps)(WaitlistStats);

@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import styles from './WaitlistItemOptions.module.scss';
 import CancelableButton from '../CancelableButton/CancelableButton.js';
 import Button from '../Button/Button.js';
+import ReactSVG from 'react-svg';
+import deleteIcon from '../../assets/trash-alt.svg';
+import bellIcon from '../../assets/bell.svg';
+import editIcon from '../../assets/edit.svg';
+
+
 
 class WaitlistItemOptions extends Component {
 
@@ -24,15 +30,15 @@ class WaitlistItemOptions extends Component {
       <div className={styles.container}>
         <div className={styles.buttons}>
           <CancelableButton trigger={this.props.onDelete} onStatus={this.statusUpdate} template="Cancel Delete ({countdown})" shouldCleanup={false}>
-            Delete
+            <ReactSVG src={deleteIcon} svgClassName={styles.icon} />
           </CancelableButton>
 
           <CancelableButton trigger={this.props.onNotify} onStatus={this.statusUpdate} template="Cancel Notification ({countdown})">
-            Buzz
+            <ReactSVG src={bellIcon} svgClassName={styles.icon} />
           </CancelableButton>
 
           <Button theme="primary" onClick={this.props.onEdit}>
-            Edit
+            <ReactSVG src={editIcon} svgClassName={styles.icon} />
           </Button>
         </div>
       </div>

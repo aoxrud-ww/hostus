@@ -1,65 +1,36 @@
 import React, { PureComponent } from 'react';
 import styles from './Duration.module.scss';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
-
-class Duration extends PureComponent {
-
-  constructor(props) {
-    super(props);
-    this.state = this.getDuration();
-  }
-
-  getDuration() {
-    let value = this.props.value;
-    if(this.props.compareTo === 'now') {
-      const seconds = (Date.now() - this.props.value) / 1000;
-      value = Math.round(seconds / 60);
-    }
-
-    return {
-      value,
-      unit: 'min',
-      isOverdue: this.props.max && this.props.max < value
-    }
-  };
-
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      const duration = this.getDuration();
-      this.setState(duration);
-    }, this.props.checkInterval);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  render() {
-    const classNames = classnames({
-      [styles.container]: true,
-      [styles.overdue]: this.state.isOverdue
-    });
-
-    return (
-      <div className={classNames}>
-        <span className={styles.value}>
-          {this.state.value}
-        </span>
-        <span className={styles.unit}>
-          {this.state.unit}
-        </span>
-      </div>
-    );
-  }
+function Duration(props) {
+  const classNames = classnames(styles.container, styles[props.size], {
+    [styles.overdue]: props.isOverdue
+  });
+  return (
+    <div className={classNames}>
+      <span className={styles.value}>
+        {props.value}
+      </span>
+      <span className={styles.unit}>
+        {props.unit}
+      </span>
+    </div>
+  );
 }
-
 
 Duration.defaultProps = {
   value: '',
-  checkInterval: 60000,
-  max: 0,
-  compareTo: ''
+  unit: 'min',
+  isOverdue: false,
+  size: 'default'
+};
+
+Duration.propTypes = {
+  value: PropTypes.number,
+  unit: PropTypes.string,
+  isOverdue: PropTypes.bool,
+  size: PropTypes.string
 };
 
 export default Duration;

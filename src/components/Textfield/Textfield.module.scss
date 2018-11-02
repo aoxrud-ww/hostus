@@ -3,7 +3,9 @@
   height: 50px;
   overflow: hidden;
   transform: translateZ(0);
+}
 
+.underline {
   &::after, &::before {
     position: absolute;
     height: 2px;

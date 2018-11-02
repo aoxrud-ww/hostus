@@ -5,15 +5,33 @@
   height: $size;
   border-radius: $size / 2;
 }
+
+.default {
+  .value {
+    font-size: 16px;
+  }
+
+  .unit {
+    font-size: 12px;
+  }
+}
+
+.large {
+  .value {
+    font-size: 32px;
+  }
+
+  .unit {
+    font-size: 14px;
+  }
+}
+
+
 .value {
-  font-size: 16px;
   margin-right: 3px;
 }
 
-.unit {
-  font-size: 12px;
+.overdue {
+  color: #F77142;
 }
 
-.overdue {
-  color: red;
-}

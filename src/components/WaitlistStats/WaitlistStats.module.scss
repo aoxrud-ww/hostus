@@ -1,34 +1,66 @@
 .container {
-  padding: 1rem 2rem;
-  background-color: #F4F7FC;
 }
 
-.metricList {
+.primaryHeadline {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 200;
+  color: #444;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.secondaryHeadline {
+  font-size: 20px;
+  font-weight: 200;
+  color: #444;
+  text-align: center;
+}
+
+.waitTimesList {
   display: flex;
   align-items: center;
+  margin-bottom: 1.5rem;
 }
 
-.metric {
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 5px;
+.waitTimeItem {
   text-align: center;
-  margin-right: 1rem;
   flex-basis: 0;
   flex-grow: 1;
-  &:last-child {
-    margin-right: 0;
-  }
+  color: #444;
 }
 
-.value {
-  font-size: 42px;
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  $size: 12px;
+  height: $size;
+  width: $size;
+  fill: #aaa;
 }
 
-.label {
-  color: #888;
+.iconContainer {
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.minorLabel {
-  font-size: 18px;
+
+.stats {
+  margin-top: 1rem;
+}
+
+.statsItem {
+  margin-bottom: 0.25rem;
+  font-size: 16px;
+  text-align: center;
+}
+
+.statsLabel {
+  color: #666;
+}
+
+.statsValue {
+  color: #444;
+  font-weight: bold;
+  margin-left: 10px;
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styles from './WaitlistItem.module.scss';
 import WaitlistItemOptions from '../WaitlistItemOptions/WaitlistItemOptions.js';
-import Duration from '../Duration/Duration.js';
-import Status from '../Status/Status.js';
+import ElapsedTime from '../ElapsedTime/ElapsedTime.js';
+import Tag from '../Tag/Tag.js';
+
 import classnames from 'classnames';
 
 class WaitlistItem extends Component {
@@ -43,6 +44,51 @@ class WaitlistItem extends Component {
     this.props.onEdit(this.props.item);
   }
 
+  renderTags() {
+    if(!this.props.item.tags || !this.props.item.tags.length) {
+      return;
+    }
+    return (
+      <div className={styles.tags}>
+        {this.props.item.tags.map(tag => (
+          <Tag key={tag} clickable={false} theme="compact">{tag}</Tag>
+        ))}
+      </div>
+    );
+  }
+
+  renderNotes() {
+    if(!this.props.item.note) {
+      return;
+    }
+
+    return (
+      <div className={styles.note}>
+        {this.props.item.note}
+      </div>
+    );
+  }
+
+  renderOptions() {
+    if(!this.state.showOptions) {
+      return;
+    }
+
+    return (
+      <div className={styles.description}>
+        <div className={styles.info}>
+          <div className={styles.actions}>
+            <WaitlistItemOptions onDelete={this.delete} onNotify={this.notify} onEdit={this.edit} />
+          </div>
+          <div className={styles.quoted}>
+            <ElapsedTime value={this.props.item.quoted} />
+            <span className={styles.label}>Quoted</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const classNames = classnames({
       [styles.container]: true,
@@ -51,30 +97,27 @@ class WaitlistItem extends Component {
 
     return (
       <div className={classNames}>
-        <a className={styles.mainRow} onClick={this.itemClick} href="javascript:void(0)">
-          <div className={styles.status}>
-            <Status value={this.props.item.status} />
-          </div>
-          <div className={styles.partySize}>
-            {this.props.item.partySize}
-          </div>
-          <div className={styles.name}>
-            {this.props.item.name}
-            <div className={styles.note}>
+
+        <button className={styles.rowButton} onClick={this.itemClick}>
+
+          <div className={styles.mainRow}>
+            <div className={styles.partySize}>
+              {this.props.item.partySize}
+            </div>
+            <div className={styles.name}>
+                {this.props.item.name}
+            </div>
+            {this.renderTags()}
+            <div className={styles.notes}>
               {this.props.item.note}
             </div>
+            <div className={styles.waiting}>
+              <ElapsedTime value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
+            </div>
           </div>
-          <div className={styles.waiting}>
-            <Duration value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
-          </div>
-          <div className={styles.quoted}>
-            <Duration value={this.props.item.quoted} />
-          </div>
+        </button>
 
-        </a>
-        <div className={styles.options}>
-        {this.state.showOptions && <WaitlistItemOptions onDelete={this.delete} onNotify={this.notify} onEdit={this.edit} />}
-        </div>
+        {this.renderOptions()}
       </div>
     );
   }

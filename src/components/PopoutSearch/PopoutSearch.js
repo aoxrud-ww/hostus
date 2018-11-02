@@ -10,7 +10,7 @@ class PopoutSearch extends PureComponent {
     this.togglePopout = this.togglePopout.bind(this);
     this.toggleFocus = this.toggleFocus.bind(this);
     this.state = {
-      visible: true
+      visible: false
     };
   }
 

@@ -14,29 +14,46 @@ class Tag extends PureComponent {
     this.props.onToggle(!this.props.isActive);
   }
 
-  render() {
-    const classNames = cx(styles.tag, {
+  clickable() {
+    return (
+      <button onClick={this.toggleActiveState} className={styles.container}>
+        {this.tag()}
+      </button>
+    )
+  }
+  tag() {
+    const classNames = cx(styles.tag, styles[this.props.theme], {
       [styles.selected]: this.props.isActive
     });
 
     return (
-      <button onClick={this.toggleActiveState} className={styles.container}>
-        <div className={classNames}>
-          {this.props.children}
-        </div>
-      </button>
+      <div className={classNames}>
+        {this.props.children}
+      </div>
     )
+  }
+
+  render() {
+    if(this.props.clickable) {
+      return this.clickable();
+    } else {
+      return this.tag();
+    }
   }
 }
 
 Tag.defaultProps = {
   isActive: false,
+  clickable: true,
+  theme: 'default',
   onToggle: () => {}
 };
 
 Tag.propTypes = {
   isActive: PropTypes.bool,
-  onToggle: PropTypes.func
+  clickable: PropTypes.bool,
+  onToggle: PropTypes.func,
+  theme: PropTypes.string
 };
 
 export default Tag;
