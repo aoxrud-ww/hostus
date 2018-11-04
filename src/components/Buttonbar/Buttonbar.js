@@ -8,7 +8,7 @@ class Buttonbar extends PureComponent {
     super(props);
     this.click = this.click.bind(this);
     this.state = {
-      selected: Number(this.props.value),
+      selected: null,
       initialValue: this.props.value
     };
   }
