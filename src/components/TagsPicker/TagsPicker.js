@@ -14,10 +14,8 @@ class TagsPicker extends PureComponent {
     super(props);
     this.state = {
       tags: this.props.tags,
-      selected: this.props.value.reduce((selected, tagLabel) => {
-        selected[tagLabel] = true;
-        return selected
-      }, {})
+      selected: this.getSelected(this.props.value),
+      value: this.props.value
     };
 
     this.updatedTags = this.updatedTags.bind(this);
@@ -29,6 +27,22 @@ class TagsPicker extends PureComponent {
 
     if(tags) {
       this.setState({ tags });
+    }
+  }
+
+  getSelected(value) {
+    return value.reduce((selected, tagLabel) => {
+      selected[tagLabel] = true;
+      return selected
+    }, {});
+  }
+
+  componentDidUpdate() {
+    if(this.state.value !== this.props.value) {
+      this.setState({
+        value: this.props.value,
+        selected: this.getSelected(this.props.value)
+      });
     }
   }
 

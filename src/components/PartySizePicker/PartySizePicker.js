@@ -17,6 +17,12 @@ class PartySizePicker extends PureComponent {
     this.incrementChange = this.incrementChange.bind(this);
   }
 
+  componentDidUpdate() {
+    if(this.props.value !== this.state.value) {
+      this.setState({value: this.props.value});
+    }
+  }
+
   incrementChange(value) {
     this.didChange(value);
   }

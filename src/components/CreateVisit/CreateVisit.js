@@ -11,6 +11,18 @@ class CreateVisit extends Component {
     super(props);
     this.updatedCustomerForm = this.updatedCustomerForm.bind(this);
     this.save = this.save.bind(this);
+    this.state = this.getModel();
+  }
+
+  getModel() {
+    return {
+      name: "",
+      phone: "",
+      partySize: 2,
+      tags: [],
+      quoted: 0,
+      notes: ""
+    };
   }
 
   updatedCustomerForm(customer) {
@@ -21,13 +33,16 @@ class CreateVisit extends Component {
 
   save() {
     this.props.addVisit(this.state.customer);
+    this.setState({
+      customer: this.getModel()
+    });
   }
 
   render() {
     return (
       <div className='card'>
         <div className={styles.form}>
-          <CustomerForm onChange={this.updatedCustomerForm} />
+          <CustomerForm onChange={this.updatedCustomerForm} {...this.state.customer} />
         </div>
         <Button theme="primary" onClick={this.save}>Save</Button>
       </div>

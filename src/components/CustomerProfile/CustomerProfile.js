@@ -47,7 +47,7 @@ class CustomerProfile extends Component {
 }
 
 CustomerProfile.propTypes = {
-  customer: PropTypes.object.isRequired,
+  customer: PropTypes.object,
   update: PropTypes.func.isRequired
 };
 

@@ -11,21 +11,29 @@ class CustomerForm extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      name: this.props.name,
-      partySize: this.props.partySize,
-      phone: this.props.phone,
-      note: this.props.note,
-      status: this.props.status,
-      quoted: this.props.quoted
-    };
+    this.state = this.getModel();
     this.changedName = this.changedAttribute.bind(this)('name');
     this.changedPhone = this.changedAttribute.bind(this)('phone');
     this.changedPartySize = this.changedAttribute.bind(this)('partySize');
     this.changedNote = this.changedAttribute.bind(this)('note');
     this.changedStatus = this.changedAttribute.bind(this)('tags');
     this.changedQuotedWaitTime = this.changedAttribute.bind(this)('quoted');
+  }
+
+  componentDidUpdate() {
+    this.setState(this.getModel());
+  }
+
+  getModel() {
+    return {
+      name: this.props.name,
+      partySize: this.props.partySize,
+      phone: this.props.phone,
+      note: this.props.note,
+      status: this.props.status,
+      quoted: this.props.quoted,
+      tags: this.props.tags
+    };
   }
 
   changedAttribute(attributeName) {
@@ -47,7 +55,7 @@ class CustomerForm extends PureComponent {
 
   render() {
     return (
-      <div>
+      <form>
         <div className={styles.row}>
           <div className={styles.twoColumn}>
             <Textfield placeholder="ie. Jane Doe" label="Customer Name" onChange={this.changedName} value={this.props.name}  />
@@ -60,7 +68,7 @@ class CustomerForm extends PureComponent {
         <hr />
         <div className={styles.row}>
           <IncrementInput value={this.props.quoted} onChange={this.changedQuotedWaitTime} step={5} label="Quoted Wait" suffix="min" allowZero={true} />
-          <PartySizeWaitTimes partySize={this.state.partySize} />
+          <PartySizeWaitTimes partySize={this.props.partySize} />
         </div>
         <hr />
         <div className={styles.row}>
@@ -69,8 +77,7 @@ class CustomerForm extends PureComponent {
         <div className={styles.row}>
           <TagsPicker value={this.props.tags} onChange={this.changedStatus} />
         </div>
-      </div>
-
+      </form>
     );
   }
 }
