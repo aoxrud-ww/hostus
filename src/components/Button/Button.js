@@ -22,7 +22,7 @@ class Button extends Component {
       [styles[this.props.theme]]: true
     });
     return (
-      <button onClick={this.click} className={classNames} disabled={this.props.disabled}>
+      <button onClick={this.click} className={classNames} disabled={this.props.disabled} type={this.props.type}>
         {this.props.children}
       </button>
     );
@@ -33,11 +33,13 @@ export default Button;
 
 Button.defaultProps = {
   theme: 'primary',
-  disabled: false
+  disabled: false,
+  type: 'button'
 };
 
 Button.propTypes = {
   theme: PropTypes.string,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  type: PropTypes.string
 };
