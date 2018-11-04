@@ -2,19 +2,6 @@ import React, { Component } from 'react';
 import styles from './WaitlistGuestForm.module.scss';
 import { connect } from "react-redux";
 
-
-
-class FloatingLabel extends Component {
-
-  render() {
-    return (
-      <div className={styles.floatingLabel}>
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
 class WaitlistGuestForm extends Component {
   constructor(props) {
     super(props);
