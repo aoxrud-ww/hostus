@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styles from './Textfield.module.scss';
 import classnames from 'classnames';
 import Inputmask from "inputmask";
+import PropTypes from 'prop-types';
 
 class Textfield extends PureComponent {
 
@@ -92,7 +93,21 @@ class Textfield extends PureComponent {
 Textfield.defaultProps = {
   placeholder: '',
   type: 'text',
-  underline: true
+  underline: true,
+  label: '',
+  onFocus: () => {},
+  onChange: () => {},
+  mask: ''
+};
+
+Textfield.propTypes = {
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  underline: PropTypes.bool,
+  label: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func,
+  mask: PropTypes.string
 };
 
 export default Textfield;

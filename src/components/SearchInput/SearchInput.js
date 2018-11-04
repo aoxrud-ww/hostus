@@ -3,6 +3,7 @@ import styles from './SearchInput.module.scss';
 import searchLoupe from '../../assets/search.svg';
 import classnames from 'classnames';
 import ReactSVG from 'react-svg';
+import PropTypes from 'prop-types';
 
 class SearchInput extends PureComponent {
 
@@ -65,5 +66,14 @@ SearchInput.defaultProps = {
   value: '',
   onChange: () => {},
   onFocusChange: () => {}
-}
+};
+
+SearchInput.propTypes = {
+  placeholder: PropTypes.string,
+  autofocus: PropTypes.bool,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onFocusChange: PropTypes.func
+};
+
 export default SearchInput;

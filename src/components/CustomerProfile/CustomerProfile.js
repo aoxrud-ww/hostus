@@ -6,6 +6,7 @@ import PageHeader from '../PageHeader/PageHeader.js';
 import CustomerForm from '../CustomerForm/CustomerForm.js';
 import { updateWaitlistVisit } from '../../actions';
 import * as routes from '../../routes';
+import PropTypes from 'prop-types';
 
 class CustomerProfile extends Component {
 
@@ -45,7 +46,10 @@ class CustomerProfile extends Component {
   }
 }
 
-
+CustomerProfile.propTypes = {
+  customer: PropTypes.object.isRequired,
+  update: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
   return {

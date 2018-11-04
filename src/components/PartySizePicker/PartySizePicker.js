@@ -3,6 +3,7 @@ import styles from './PartySizePicker.module.scss';
 import Button from "../Button/Button.js";
 import IncrementInput from "../IncrementInput/IncrementInput.js";
 import Buttonbar from "../Buttonbar/Buttonbar.js";
+import PropTypes from 'prop-types';
 
 class PartySizePicker extends PureComponent {
 
@@ -59,6 +60,11 @@ class PartySizePicker extends PureComponent {
 PartySizePicker.defaultProps = {
   value: 1,
   onChange: () => {}
+};
+
+PartySizePicker.propTypes = {
+  value: PropTypes.number,
+  onChange: PropTypes.func.isRequired
 };
 
 export default PartySizePicker;
