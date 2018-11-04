@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styles from './Duration.module.scss';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-function Duration(props) {
-  const classNames = classnames(styles.container, styles[props.size], {
-    [styles.overdue]: props.isOverdue
-  });
-  return (
-    <div className={classNames}>
-      <span className={styles.value}>
-        {props.value}
-      </span>
-      <span className={styles.unit}>
-        {props.unit}
-      </span>
-    </div>
-  );
+class Duration extends PureComponent {
+
+  render() {
+    const classNames = classnames(styles.container, styles[this.props.size], {
+      [styles.overdue]: this.props.isOverdue
+    });
+    return (
+      <div className={classNames}>
+        <span className={styles.value}>
+          {this.props.value}
+        </span>
+        <span className={styles.unit}>
+          {this.props.unit}
+        </span>
+      </div>
+    );
+  }
+
 }
 
 Duration.defaultProps = {

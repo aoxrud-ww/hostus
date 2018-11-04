@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './SearchError.module.scss';
 import searchLoupe from '../../assets/search.svg';
 import ReactSVG from 'react-svg';
 
-class SearchError extends Component {
+class SearchError extends PureComponent {
 
   render() {
     return (
