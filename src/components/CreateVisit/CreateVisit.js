@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import styles from './CreateVisit.module.scss';
 import { connect } from "react-redux";
 import Button from '../Button/Button.js';
-import PageHeader from '../PageHeader/PageHeader.js';
 import CustomerForm from '../CustomerForm/CustomerForm.js';
-
 import { createWaitlistVisit } from '../../actions';
-import * as routes from '../../routes';
 
 class CreateVisit extends Component {
 

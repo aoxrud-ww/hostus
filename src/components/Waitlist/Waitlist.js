@@ -4,11 +4,7 @@ import styles from './Waitlist.module.scss';
 import { connect } from "react-redux";
 import SearchInput from '../SearchInput/SearchInput.js';
 import SearchError from '../SearchError/SearchError.js';
-import Button from '../Button/Button.js';
-import PageHeader from '../PageHeader/PageHeader.js';
 import WaitlistHeader from '../WaitlistHeader/WaitlistHeader.js';
-import WaitlistStats from '../WaitlistStats/WaitlistStats.js';
-import { Link } from 'react-router-dom';
 import * as routes  from '../../routes.js';
 import {deleteWailistCustomer, notifyWaitlistCustomer, editWaitlistCustomer} from '../../actions';
 
@@ -51,26 +47,12 @@ class Waitlist extends Component {
 
   render() {
     const filteredList = this.getFilteredList(this.state.query);
-
-    // <PageHeader title="Waitlist">
-    //       <div className={styles.headerCta}>
-    //
-
-    //       </div>
-    //     </PageHeader>
-    //     <WaitlistStats />
-// {filteredList.length > 0 && <WaitlistHeader />}
-//<Link to={routes.ADD_GUEST}><Button theme='page-header'>Add</Button></Link>
     return (
       <div className='card'>
-
-
         <div className='card-header'>
           <SearchInput onChange={this.onSearch} value={this.state.query} placeholder="Search Waitlist..." />
         </div>
-
         {filteredList.length > 0 && <WaitlistHeader />}
-
         <ul className={styles.list}>
           {filteredList.map(item =>
             (<WaitlistItem
@@ -81,7 +63,6 @@ class Waitlist extends Component {
               onEdit={this.onEdit} />)
           )}
         </ul>
-
         {!filteredList.length && <SearchError query={this.state.query} />}
       </div>
     );
@@ -96,5 +77,6 @@ const mapDispatchToProps = {
   onDelete: deleteWailistCustomer,
   onNotify: notifyWaitlistCustomer,
   onEdit: editWaitlistCustomer
-}
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Waitlist);

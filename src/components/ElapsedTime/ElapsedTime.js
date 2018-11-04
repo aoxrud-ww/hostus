@@ -19,7 +19,7 @@ class ElapsedTime extends PureComponent {
     return {
       value,
       unit: 'min',
-      isOverdue: this.props.max && this.props.max < value
+      isOverdue: !!(this.props.max && this.props.max < value)
     }
   };
 
