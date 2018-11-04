@@ -12,4 +12,4 @@ Simple waitlist management tool for restaurants using ReactJS
 `npm install`
 
 ### Local Development
-'npm start'
+`npm start`
