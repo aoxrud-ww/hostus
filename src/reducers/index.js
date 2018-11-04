@@ -1,16 +1,7 @@
 import * as actions from '../constants';
 import WaitTimes from '../services/WaitTimes.js';
+import Tags from '../services/Tags.js';
 
-const calculateStats = (list) => {
-  return list.reduce((memo, item) => {
-    memo.peopleServed += item.partySize;
-    return memo;
-  }, {
-    peopleServed: 0,
-    groupsServed: 0,
-    waiting: list.length
-  });
-}
 
 const waitlist = (state, action) => {
   switch(action.type) {
@@ -32,24 +23,13 @@ const waitlist = (state, action) => {
       const list = state.list.map((visit, index) => {
         return (visit.id === action.customer.id ? action.customer : visit);
       });
-      const waits = new WaitTimes({
+
+      const waitTimes = (new WaitTimes({
         list,
         waitTimes: state.waitTimes
-      });
-      const waitTimes = waits.calculate();
+      })).calculate();
 
-      const availableTags = state.tags.reduce((map, tag) => {
-        map[tag] = 1;
-        return map;
-      }, {});
-      const tagsUsed = {...state.tagsUsed};
-      const tags = [...state.tags];
-      action.customer.tags.forEach(tag => {
-        if(!availableTags[tag]) {
-          tags.unshift(tag);
-        }
-        tagsUsed[tag] = (tagsUsed[tag] || 0) + 1;
-      });
+      const {tagsUsed, tags} = (new Tags({state, customer: action.customer})).calculate();
 
       return {...state, list, tagsUsed, tags, waitTimes};
     }
