@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import * as routes from './routes.js';
+import * as routes from '../../routes.js';
 
-import Dashboard from './components/Dashboard/Dashboard.js';
-import AppHeader from './components/AppHeader/AppHeader.js';
-import CreateVisit from './components/CreateVisit/CreateVisit.js';
-import CustomerProfile from './components/CustomerProfile/CustomerProfile.js';
+import Dashboard from '../Dashboard/Dashboard.js';
+import AppHeader from '../AppHeader/AppHeader.js';
+import CreateVisit from '../CreateVisit/CreateVisit.js';
+import CustomerProfile from '../CustomerProfile/CustomerProfile.js';
 
-import reducer from './reducers';
+import reducer from '../../reducers';
 import './App.scss';
 
 const store = createStore(reducer, {
