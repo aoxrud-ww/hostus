@@ -9,15 +9,16 @@ class Dashboard extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.waitlist}>
-          <Waitlist history={this.props.history} />
+        <div className={styles.stats}>
+          <WaitlistStats className={styles.stats} />
         </div>
 
-        <div className={styles.sidebar}>
-          <div className={styles.stats}>
-            <WaitlistStats className={styles.stats} />
+        <div className={styles.twoColumn}>
+          <div className={styles.waitlist}>
+            <Waitlist history={this.props.history} />
           </div>
-          <div className={styles.stats}>
+
+          <div className={styles.sidebar}>
             <CreateVisit history={this.props.history} />
           </div>
         </div>

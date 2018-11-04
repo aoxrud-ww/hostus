@@ -33,7 +33,7 @@ class WaitlistStats extends PureComponent {
 
     return (
       <div className='card'>
-        <h1 className={styles.primaryHeadline}>Waitlist</h1>
+        <h1 className={styles.primaryHeadline}>Average Wait Times</h1>
         <ul className={styles.waitTimesList}>
           {this.props.waitTimes.map(metric => (
             <li key={metric.label} className={styles.waitTimeItem}>
@@ -42,19 +42,20 @@ class WaitlistStats extends PureComponent {
           ))}
         </ul>
 
-        <h1 className={styles.secondaryHeadline}>Statistics</h1>
-        <ul className={styles.stats}>
-          {stats.map(metric => (
-            <li key={metric.label} className={styles.statsItem}>
-              <span className={styles.statsLabel}>{metric.label}</span>
-              <span className={styles.statsValue}>{metric.value}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     );
 
-
+    /*
+    <h1 className={styles.secondaryHeadline}>Statistics</h1>
+    <ul className={styles.stats}>
+      {stats.map(metric => (
+        <li key={metric.label} className={styles.statsItem}>
+          <span className={styles.statsLabel}>{metric.label}</span>
+          <span className={styles.statsValue}>{metric.value}</span>
+        </li>
+      ))}
+    </ul>
+    */
   }
 }
 

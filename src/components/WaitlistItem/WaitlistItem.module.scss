@@ -10,7 +10,8 @@ $hover-bg-color: #e7f0fa;
   cursor: pointer;
   text-align: left;
   position: relative;
-
+  border-bottom: 1px solid #F2F2F2;
+  padding-bottom: 1rem;
 
   &:hover, &:focus {
     outline: 0;
@@ -36,7 +37,7 @@ $hover-bg-color: #e7f0fa;
       background-color: #F2F2F2;
     }
 
-    .mainRow {
+    .rowButton {
       border-bottom: 0;
     }
   }
@@ -45,8 +46,7 @@ $hover-bg-color: #e7f0fa;
 .mainRow {
   display: flex;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #F2F2F2;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .partySize {
@@ -63,6 +63,8 @@ $hover-bg-color: #e7f0fa;
   width: 200px;
 }
 .notes {
+  margin-left: 40px;
+  padding-left: 1rem;
   flex-grow: 2;
   font-size: 14px;
   color: rgba(0,0,0,0.7);

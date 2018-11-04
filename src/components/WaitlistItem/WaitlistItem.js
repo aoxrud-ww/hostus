@@ -48,13 +48,9 @@ class WaitlistItem extends Component {
     if(!this.props.item.tags || !this.props.item.tags.length) {
       return;
     }
-    return (
-      <div className={styles.tags}>
-        {this.props.item.tags.map(tag => (
-          <Tag key={tag} clickable={false} theme="compact">{tag}</Tag>
-        ))}
-      </div>
-    );
+    return this.props.item.tags.map(tag => (
+      <Tag key={tag} clickable={false} theme="compact">{tag}</Tag>
+    ));
   }
 
   renderNotes() {
@@ -107,13 +103,15 @@ class WaitlistItem extends Component {
             <div className={styles.name}>
                 {this.props.item.name}
             </div>
-            {this.renderTags()}
-            <div className={styles.notes}>
-              {this.props.item.note}
+            <div className={styles.tags}>
+              {this.renderTags()}
             </div>
             <div className={styles.waiting}>
               <ElapsedTime value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
             </div>
+          </div>
+          <div className={styles.notes}>
+            {this.props.item.note}
           </div>
         </button>
 
