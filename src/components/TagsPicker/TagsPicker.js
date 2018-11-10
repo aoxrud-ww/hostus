@@ -48,7 +48,8 @@ class TagsPicker extends PureComponent {
 
   updateSelected(selected) {
     this.setState({ selected }, () => {
-      this.props.onChange(this.state.selected);
+      const tagsAsArray = Object.keys(selected).filter(tag => !!selected[tag]);
+      this.props.onChange(tagsAsArray);
     });
   }
 
