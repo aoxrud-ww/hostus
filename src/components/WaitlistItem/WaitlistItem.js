@@ -3,8 +3,8 @@ import styles from './WaitlistItem.module.scss';
 import WaitlistItemOptions from '../WaitlistItemOptions/WaitlistItemOptions.js';
 import ElapsedTime from '../ElapsedTime/ElapsedTime.js';
 import Tag from '../Tag/Tag.js';
-
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 class WaitlistItem extends Component {
 
@@ -18,7 +18,7 @@ class WaitlistItem extends Component {
     this.notify = this.notify.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
-
+    this.complete = this.complete.bind(this);
   }
 
   toggleOptions() {
@@ -40,8 +40,11 @@ class WaitlistItem extends Component {
   }
 
   edit() {
-    console.log('called on eidt');
     this.props.onEdit(this.props.item);
+  }
+
+  complete() {
+    this.props.onComplete(this.props.item);
   }
 
   renderTags() {
@@ -74,7 +77,7 @@ class WaitlistItem extends Component {
       <div className={styles.description}>
         <div className={styles.info}>
           <div className={styles.actions}>
-            <WaitlistItemOptions onDelete={this.delete} onNotify={this.notify} onEdit={this.edit} />
+            <WaitlistItemOptions onDelete={this.delete} onNotify={this.notify} onEdit={this.edit} onComplete={this.complete} />
           </div>
           <div className={styles.quoted}>
             <ElapsedTime value={this.props.item.quoted} />
@@ -120,5 +123,18 @@ class WaitlistItem extends Component {
     );
   }
 }
+
+WaitlistItem.defaultProps = {
+  item: {}
+}
+
+WaitlistItem.propTypes = {
+  item: PropTypes.object,
+  onComplete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired
+}
+
 
 export default WaitlistItem;

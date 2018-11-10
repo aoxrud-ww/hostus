@@ -60,6 +60,7 @@ class Waitlist extends Component {
               item={item}
               onDelete={this.props.onDelete}
               onNotify={this.props.onNotify}
+              onComplete={this.props.onComplete}
               onEdit={this.onEdit} />)
           )}
         </ul>
@@ -76,7 +77,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   onDelete: deleteWailistCustomer,
   onNotify: notifyWaitlistCustomer,
-  onEdit: editWaitlistCustomer
+  onEdit: editWaitlistCustomer,
+  onComplete: deleteWailistCustomer
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Waitlist);
