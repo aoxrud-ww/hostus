@@ -4,8 +4,21 @@ import Textfield from '../Textfield/Textfield.js';
 import PartySizePicker from '../PartySizePicker/PartySizePicker.js';
 import TagsPicker from '../TagsPicker/TagsPicker.js';
 import IncrementInput from '../IncrementInput/IncrementInput.js';
-import PartySizeWaitTimes from '../PartySizeWaitTimes/PartySizeWaitTimes.js';
+import Button from '../Button/Button.js';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
+import Validator from '../../services/Validator';
+import { get } from 'lodash';
+
+const validator = new Validator();
+const modelValidation = {
+  name: ['isNotEmpty'],
+  partySize: ['isInt', 'isMin:1']
+};
+
+function FormError({on, message}) {
+  return on ? <div className={styles.error}>{message}</div> : "";
+}
 
 class CustomerForm extends PureComponent {
 
@@ -16,41 +29,48 @@ class CustomerForm extends PureComponent {
     this.changedPhone = this.changedAttribute.bind(this)('phone');
     this.changedPartySize = this.changedAttribute.bind(this)('partySize');
     this.changedNote = this.changedAttribute.bind(this)('note');
-    this.changedStatus = this.changedAttribute.bind(this)('tags');
+    this.changedTags = this.changedAttribute.bind(this)('tags');
     this.changedQuotedWaitTime = this.changedAttribute.bind(this)('quoted');
-  }
-
-  componentDidUpdate() {
-    this.setState(this.getModel());
+    this.save = this.save.bind(this);
   }
 
   getModel() {
     return {
       name: this.props.name,
-      partySize: this.props.partySize,
       phone: this.props.phone,
+      partySize: this.props.partySize,
       note: this.props.note,
-      status: this.props.status,
-      quoted: this.props.quoted,
-      tags: this.props.tags
+      tags: this.props.tags,
+      quoted: this.props.quoted
     };
   }
 
   changedAttribute(attributeName) {
     return (attributeValue) => {
       this.setState({
-        [attributeName]: this.transformValue(attributeName, attributeValue)
-      }, () => {
-        this.props.onChange(this.state);
+        [attributeName]: attributeValue
       });
     }
   }
 
-  transformValue(name, value) {
-    if(name === 'tags') {
-      value = Object.keys(value).filter(tag => value[tag] === true);
+  save() {
+    const validations = validator.validateModel(this.state, modelValidation);
+    if(validations.isValid) {
+
+      const result = this.props.onSave(this.state);
+      this.setState({validations: null});
+      if(result) {
+        this.reset();
+      }
+    } else {
+      this.setState({
+        validations
+      });
     }
-    return value;
+  }
+
+  reset() {
+    this.setState(this.getModel());
   }
 
   render() {
@@ -58,25 +78,31 @@ class CustomerForm extends PureComponent {
       <form>
         <div className={styles.row}>
           <div className={styles.twoColumn}>
-            <Textfield placeholder="ie. Jane Doe" label="Customer Name" onChange={this.changedName} value={this.props.name}  />
-            <Textfield label="Phone" mask="(999) 999 - 9999" onChange={this.changedPhone} value={this.props.phone} />
+            <div>
+              <Textfield placeholder="ie. Jane Doe" label="Customer Name" onChange={this.changedName} value={this.state.name}  />
+              <FormError on={get(this.state, 'validations.name.isNotEmpty') === false} message="Please enter a name." />
+            </div>
+            <div>
+              <Textfield label="Phone" mask="(999) 999 - 9999" onChange={this.changedPhone} value={this.state.phone} />
+            </div>
           </div>
         </div>
         <div className={styles.row}>
-          <PartySizePicker onChange={this.changedPartySize} value={this.props.partySize}  />
+          <PartySizePicker onChange={this.changedPartySize} value={this.state.partySize}  />
+          <FormError on={get(this.state, 'validations.partySize.isMin') === false} message="Please a valid party size." />
+        </div>
+        <hr />
+        <div className={cx(styles.row, styles.quoted)}>
+          <IncrementInput value={this.state.quoted} onChange={this.changedQuotedWaitTime} step={5} label="Quoted Wait" suffix="min" allowZero={true} />
         </div>
         <hr />
         <div className={styles.row}>
-          <IncrementInput value={this.props.quoted} onChange={this.changedQuotedWaitTime} step={5} label="Quoted Wait" suffix="min" allowZero={true} />
-          <PartySizeWaitTimes partySize={this.props.partySize} />
-        </div>
-        <hr />
-        <div className={styles.row}>
-          <Textfield value={this.props.note} onChange={this.changedNote} label="Notes" placeholder="ie. Special requirements" underline={false} />
+          <Textfield value={this.state.note} onChange={this.changedNote} label="Notes" placeholder="ie. Special requirements" underline={false} />
         </div>
         <div className={styles.row}>
-          <TagsPicker value={this.props.tags} onChange={this.changedStatus} />
+          <TagsPicker value={this.state.tags} onChange={this.changedTags} />
         </div>
+        <Button theme="primary" onClick={this.save}>Save</Button>
       </form>
     );
   }
@@ -87,17 +113,18 @@ CustomerForm.defaultProps = {
   partySize: 1,
   phone: '',
   note: '',
-  quoted: 0
-}
+  quoted: 0,
+  tags: []
+};
 
 CustomerForm.propTypes = {
   name: PropTypes.string,
   partySize: PropTypes.number,
   phone: PropTypes.string,
   note: PropTypes.string,
+  tags: PropTypes.array,
   quoted: PropTypes.number,
-  onChange: PropTypes.func.isRequired
-}
-
+  onSave: PropTypes.func.isRequired
+};
 
 export default CustomerForm;
