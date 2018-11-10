@@ -25,12 +25,6 @@ class WaitTimesBySize extends PureComponent {
 
 class WaitlistStats extends PureComponent {
   render() {
-    const stats = [
-      {label: "Parties in waitlist", value: this.props.list.length},
-      {label: "Called parties", value: this.props.list.length},
-      {label: "Served parties", value: this.props.list.length},
-    ];
-
     return (
       <div className='card'>
         <h1 className={styles.primaryHeadline}>Average Wait Times</h1>
@@ -45,24 +39,12 @@ class WaitlistStats extends PureComponent {
       </div>
     );
 
-    /*
-    <h1 className={styles.secondaryHeadline}>Statistics</h1>
-    <ul className={styles.stats}>
-      {stats.map(metric => (
-        <li key={metric.label} className={styles.statsItem}>
-          <span className={styles.statsLabel}>{metric.label}</span>
-          <span className={styles.statsValue}>{metric.value}</span>
-        </li>
-      ))}
-    </ul>
-    */
   }
 }
 
 
 const mapStateToProps = state => {
   return {
-    list: state.list,
     waitTimes: state.waitTimes
   };
 };
