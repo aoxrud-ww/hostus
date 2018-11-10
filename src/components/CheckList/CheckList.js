@@ -64,7 +64,7 @@ class CheckList extends PureComponent {
 
 CheckList.defaultProps = {
   list: [],
-  focusOn: null,
+  focusOn: '',
   onChange: () => {},
   onFocusChange: () => {},
   selected: {}
@@ -72,7 +72,7 @@ CheckList.defaultProps = {
 
 CheckList.propTypes = {
   list: PropTypes.array,
-  focusOn: PropTypes.object,
+  focusOn: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   onChange: PropTypes.func,
   onFocusChange: PropTypes.func,
   selected: PropTypes.object
