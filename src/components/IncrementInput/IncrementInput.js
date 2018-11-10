@@ -32,8 +32,9 @@ class IncrementInput extends PureComponent {
   }
 
   didChange(e) {
-    this.setState({value: e.target.value}, () => {
-      this.broadcastValue(this.state.value);
+    const value = parseInt(e.target.value.replace(/[^\d]/, '')) || 0;
+    this.setState({ value }, () => {
+      this.broadcastValue(value);
     });
   }
 
