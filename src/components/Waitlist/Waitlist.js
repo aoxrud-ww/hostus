@@ -7,6 +7,8 @@ import SearchError from '../SearchError/SearchError.js';
 import WaitlistHeader from '../WaitlistHeader/WaitlistHeader.js';
 import * as routes  from '../../routes.js';
 import {deleteWailistCustomer, notifyWaitlistCustomer, editWaitlistCustomer} from '../../actions';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 class Waitlist extends Component {
   constructor(props) {
@@ -14,10 +16,19 @@ class Waitlist extends Component {
 
     this.onSearch = this.onSearch.bind(this);
     this.onEdit = this.onEdit.bind(this);
-
     this.state = {
-      list: this.props.list
-    }
+      list: this.props.list,
+      transitionConfig: {
+        transitionName: {
+          enter: styles.animateEnter,
+          enterActive: styles.animateEnterActive,
+          leave: styles.animateLeave,
+          leaveActive: styles.animateLeaveActive,
+        },
+        transitionEnterTimeout: 500,
+        transitionLeaveTimeout: 300
+      }
+    };
   }
 
   onEdit(customer) {
@@ -53,17 +64,17 @@ class Waitlist extends Component {
           <SearchInput onChange={this.onSearch} value={this.state.query} placeholder="Search Waitlist..." />
         </div>
         {filteredList.length > 0 && <WaitlistHeader />}
-        <ul className={styles.list}>
-          {filteredList.map(item =>
-            (<WaitlistItem
-              key={item.id}
-              item={item}
-              onDelete={this.props.onDelete}
-              onNotify={this.props.onNotify}
-              onComplete={this.props.onComplete}
-              onEdit={this.onEdit} />)
-          )}
-        </ul>
+        <ReactCSSTransitionGroup component="ul" className={styles.list} {...this.state.transitionConfig}>
+        {filteredList.map(item =>
+          (<WaitlistItem
+            key={item.id}
+            item={item}
+            onDelete={this.props.onDelete}
+            onNotify={this.props.onNotify}
+            onComplete={this.props.onComplete}
+            onEdit={this.onEdit} />)
+        )}
+        </ReactCSSTransitionGroup>
         {!filteredList.length && <SearchError query={this.state.query} />}
       </div>
     );
