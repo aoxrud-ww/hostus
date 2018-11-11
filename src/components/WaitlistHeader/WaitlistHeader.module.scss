@@ -1,3 +1,5 @@
+@import "../../utils.scss";
+
 .heading {
   display: flex;
   color: rgba(0,0,0,.5);
@@ -21,8 +23,14 @@
   flex-grow: 0;
 }
 
-.waiting {
+.waiting, .quoted {
   flex-shrink: 0;
-  width: 50px;
+  width: 70px;
+  text-align: right;
 }
 
+.quoted {
+  @include tablet {
+    display: none;
+  }
+}

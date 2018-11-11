@@ -1,4 +1,7 @@
+@import "../../utils.scss";
+
 $hover-bg-color: #e7f0fa;
+
 
 .rowButton {
   display: block;
@@ -22,6 +25,7 @@ $hover-bg-color: #e7f0fa;
 .container {
   margin: 0 -1rem;
   padding: 0 1rem;
+  min-height: 72px;
 
   &.opened {
     background-color: rgba(0,0,0,0.02);
@@ -40,6 +44,10 @@ $hover-bg-color: #e7f0fa;
     .rowButton {
       border-bottom: 0;
     }
+
+    .tags, .waiting, .quoted {
+      display: none;
+    }
   }
 }
 
@@ -47,6 +55,7 @@ $hover-bg-color: #e7f0fa;
   display: flex;
   align-items: center;
   padding: 1rem 1rem 0 1rem;
+
 }
 
 .partySize {
@@ -59,14 +68,17 @@ $hover-bg-color: #e7f0fa;
   font-weight: 400;
   flex-grow: 1;
 }
+
 .tags {
   flex-shrink: 0;
   width: 200px;
+  flex-grow: 2;
 
-  > * {
-    margin: 0;
+  @include tablet {
+    display: none;
   }
 }
+
 .notes {
   margin-left: 40px;
   padding-left: 1rem;
@@ -75,36 +87,21 @@ $hover-bg-color: #e7f0fa;
   color: rgba(0,0,0,0.7);
 }
 
-.waiting {
-  width: 50px;
+.quoted {
+  @include tablet {
+    display: none;
+  }
+}
+
+.waiting, .quoted {
+  width: 70px;
   flex-shrink: 0;
+  text-align: right;
 }
 
 .description {
   padding-bottom: 1rem;
   margin-left: calc(40px + 1rem);
-}
-
-.waits {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-
-  > * {
-    margin-right: 1rem;
-  }
-
-  .quoted {
-    text-align: center;
-  }
-}
-
-.quoted {
-  text-align: center;
-}
-
-.waiting {
-  text-align: right;
 }
 
 .label {
