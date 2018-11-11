@@ -47,13 +47,18 @@ class WaitlistItem extends Component {
     this.props.onComplete(this.props.item);
   }
 
-  renderTags() {
+  renderTags(max = 10) {
     if(!this.props.item.tags || !this.props.item.tags.length) {
       return;
     }
-    return this.props.item.tags.map(tag => (
+
+    const hasMoreTags = this.props.item.tags.length > max;
+
+    const tags = this.props.item.tags.slice(0, max).map(tag => (
       <Tag key={tag} clickable={false} theme="compact">{tag}</Tag>
     ));
+
+    return (<div>{tags} {hasMoreTags && <span>+</span>}</div>);
   }
 
   renderNotes() {
@@ -100,7 +105,6 @@ class WaitlistItem extends Component {
       <div className={classNames}>
 
         <button className={styles.rowButton} onClick={this.itemClick}>
-
           <div className={styles.mainRow}>
             <div className={styles.partySize}>
               {this.props.item.partySize}
@@ -109,13 +113,14 @@ class WaitlistItem extends Component {
                 {this.props.item.name}
             </div>
             <div className={styles.tags}>
-              {this.renderTags()}
+              {this.renderTags(3)}
             </div>
-            {!this.state.showOptions &&
-              <div className={styles.waiting}>
-                <ElapsedTime value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
-              </div>
-            }
+            <div className={styles.waiting}>
+              <ElapsedTime value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
+            </div>
+            <div className={styles.quoted}>
+              <ElapsedTime value={this.props.item.quoted} />
+            </div>
           </div>
           <div className={styles.notes}>
             {this.props.item.note}

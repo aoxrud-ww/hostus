@@ -31,9 +31,10 @@ $background-color-active: #103F55;
   }
 
   &.compact {
-    padding: 0.2rem .4rem;
-    font-size: 12px;
+    padding: 0.15rem .4rem;
+    font-size: 11px;
     border-radius: 5px;
+    margin: 0 5px 0 0;
   }
 
   &:first-child {
