@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styles from './CustomerProfile.module.scss';
 import { connect } from "react-redux";
-import Button from '../Button/Button.js';
-import PageHeader from '../PageHeader/PageHeader.js';
 import CustomerForm from '../CustomerForm/CustomerForm.js';
 import { updateWaitlistVisit } from '../../actions';
 import * as routes from '../../routes';
@@ -12,34 +10,26 @@ class CustomerProfile extends Component {
 
   constructor(props) {
     super(props);
-
-    this.updatedCustomerForm = this.updatedCustomerForm.bind(this);
     this.save = this.save.bind(this);
     this.state = {};
   }
 
-  updatedCustomerForm(customer) {
-    this.setState({
-      customer
-    });
-  }
-
-  save() {
-    const customer = Object.assign({}, this.props.customer, this.state.customer);
-    this.props.update(customer);
+  save(customer) {
+    const customerData = Object.assign({}, this.props.customer, customer);
+    this.props.update(customerData);
     this.props.history.push(routes.HOME);
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <PageHeader title="Profile" />
 
         <div className={styles.customer}>
+        <div className='card'>
           <div className={styles.form}>
-            <CustomerForm onChange={this.updatedCustomerForm} {...this.props.customer} />
+            <CustomerForm onSave={this.save} {...this.props.customer} />
           </div>
-          <Button theme="primary" onClick={this.save}>Save</Button>
+        </div>
         </div>
       </div>
     );
