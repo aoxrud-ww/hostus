@@ -57,10 +57,15 @@ $hover-bg-color: #e7f0fa;
 .name {
   width: 150px;
   font-weight: 400;
+  flex-grow: 1;
 }
 .tags {
   flex-shrink: 0;
   width: 200px;
+
+  > * {
+    margin: 0;
+  }
 }
 .notes {
   margin-left: 40px;
@@ -77,113 +82,33 @@ $hover-bg-color: #e7f0fa;
 
 .description {
   padding-bottom: 1rem;
+  margin-left: calc(40px + 1rem);
 }
 
-.info {
+.waits {
   display: flex;
-  align-items: top;
-  padding: 0 1rem;
-}
-.actions {
+  align-items: center;
+  margin-bottom: 1rem;
 
-  flex-grow: 2;
+  > * {
+    margin-right: 1rem;
+  }
+
+  .quoted {
+    text-align: center;
+  }
 }
 
 .quoted {
-  text-align: right;
+  text-align: center;
 }
 
 .waiting {
   text-align: right;
 }
 
-.note, .tags {
-}
 .label {
   font-size: 11px;
   color: rgba(0,0,0,.5);
   text-transform: uppercase;
 }
-/*
-.mainRow {
-  display: flex;
-  align-contents: center;
-  justify-contents: space-between;
-  color: #2B2B2B;
-  cursor: pointer;
-  padding: 1rem 2rem;
-  position: relative;
-  text-decoration: none;
-  position: relative;
-  font-size: 18px;
-  outline: none;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: $hover-bg-color;
-    opacity: 0;
-    transition: opacity ease-out 150ms;
-    z-index: 0;
-  }
-
-  & > * {
-    position: relative;
-  }
-
-  &:hover, &:focus {
-    &::before {
-      opacity: 1;
-    }
-  }
-}
-
-.options {
-  transition: max-height ease-in 300ms;
-  max-height: 0;
-  overflow: hidden;
-  background-color: $hover-bg-color;
-}
-
-.name {
-  flex-grow: 2;
-}
-
-.partySize {
-  flex-shrink: 0;
-  width: 80px;
-  text-align: center;
-}
-
-.waiting, .quoted {
-  width: 100px;
-}
-
-.status {
-  flex-shrink: 0;
-  width: 40px;
-  text-align: center;
-}
-
-.note {
-  padding-top: 5px;
-  font-size: 14px;
-  color: rgba(0,0,0,0.6);
-}
-
-.opened {
-  .mainRow {
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  .options {
-    max-height: 200px;
-  }
-}
-*/

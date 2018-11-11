@@ -12,19 +12,6 @@ import checkIcon from '../../assets/check-mark.svg';
 
 class WaitlistItemOptions extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {message: ''};
-    this.statusUpdate = this.statusUpdate.bind(this);
-  }
-
-  statusUpdate(notificationState) {
-    let message = '';
-
-    this.setState(state => ({
-      message
-    }));
-  }
 
   render() {
     return (
@@ -34,11 +21,13 @@ class WaitlistItemOptions extends Component {
             <ReactSVG src={checkIcon} svgClassName={styles.icon} />
           </Button>
 
-          <CancelableButton trigger={this.props.onNotify} onStatus={this.statusUpdate} template="Cancel Notification ({countdown})">
-            <ReactSVG src={bellIcon} svgClassName={styles.icon} />
-          </CancelableButton>
+          {this.props.phone &&
+            <CancelableButton trigger={this.props.onNotify}>
+              <ReactSVG src={bellIcon} svgClassName={styles.icon} />
+            </CancelableButton>
+          }
 
-          <CancelableButton trigger={this.props.onDelete} onStatus={this.statusUpdate} template="Cancel Delete ({countdown})" shouldCleanup={false}>
+          <CancelableButton trigger={this.props.onDelete} shouldCleanup={false}>
             <ReactSVG src={deleteIcon} svgClassName={styles.icon} />
           </CancelableButton>
 
