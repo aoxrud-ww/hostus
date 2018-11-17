@@ -1,24 +1,9 @@
 .container {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  background: white;
-  border-radius: 5px;
-  overflow: hidden;
-  padding-bottom: 1rem;
-}
-
-.customer {
-  padding: 2rem;
-  max-width: 450px;
+  max-width: 1024px;
+  margin: 1rem auto;
 }
 
 .form {
-  margin-bottom: 1rem;
-}
+  max-width: 450px;
 
-.twoColumn {
-  display: flex;
-}
-
-.meta {
-  flex-grow: 2;
 }

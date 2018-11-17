@@ -80,16 +80,6 @@ class WaitlistItem extends Component {
 
     return (
       <div className={styles.description}>
-        <div className={styles.waits}>
-          <div className={styles.waiting}>
-            <ElapsedTime value={this.props.item.createdAt} compareTo="now" max={this.props.item.quoted} />
-            <span className={styles.label}>Waiting</span>
-          </div>
-          <div className={styles.quoted}>
-            <ElapsedTime value={this.props.item.quoted} />
-            <span className={styles.label}>Quoted</span>
-          </div>
-        </div>
         <WaitlistItemOptions phone={this.props.item.phone} onDelete={this.delete} onNotify={this.notify} onEdit={this.edit} onComplete={this.complete} />
       </div>
     )
@@ -110,7 +100,8 @@ class WaitlistItem extends Component {
               {this.props.item.partySize}
             </div>
             <div className={styles.name}>
-                {this.props.item.name}
+              <div>{this.props.item.name}</div>
+              <div className={styles.notes}>{this.props.item.note}</div>
             </div>
             <div className={styles.tags}>
               {this.renderTags(3)}
@@ -122,9 +113,7 @@ class WaitlistItem extends Component {
               <ElapsedTime value={this.props.item.quoted} />
             </div>
           </div>
-          <div className={styles.notes}>
-            {this.props.item.note}
-          </div>
+
         </button>
 
         {this.renderOptions()}

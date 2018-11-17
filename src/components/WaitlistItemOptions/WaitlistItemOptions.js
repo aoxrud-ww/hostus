@@ -17,22 +17,22 @@ class WaitlistItemOptions extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.buttons}>
-          <Button theme="primary" onClick={this.props.onComplete}>
-            <ReactSVG src={checkIcon} svgClassName={styles.icon} />
+          <Button theme="secondary" onClick={this.props.onComplete}>
+            <ReactSVG src={checkIcon} svgClassName={styles.icon} /> Seat
           </Button>
 
           {this.props.phone &&
             <CancelableButton trigger={this.props.onNotify}>
-              <ReactSVG src={bellIcon} svgClassName={styles.icon} />
+              <ReactSVG src={bellIcon} svgClassName={styles.icon} /> Notify
             </CancelableButton>
           }
 
           <CancelableButton trigger={this.props.onDelete} shouldCleanup={false}>
-            <ReactSVG src={deleteIcon} svgClassName={styles.icon} />
+            <ReactSVG src={deleteIcon} svgClassName={styles.icon} /> Delete
           </CancelableButton>
 
-          <Button theme="primary" onClick={this.props.onEdit}>
-            <ReactSVG src={editIcon} svgClassName={styles.icon} />
+          <Button theme="secondary" onClick={this.props.onEdit}>
+            <ReactSVG src={editIcon} svgClassName={styles.icon} /> Edit
           </Button>
         </div>
       </div>

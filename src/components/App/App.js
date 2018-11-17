@@ -18,11 +18,10 @@ const store = createStore(reducer, {
     name: "Coffee & Co"
   },
   list: [
-    {id: 1, name: "Alex Oxrud", partySize: 3, quoted: 5, phone: "8015601194", createdAt: Date.now(), note: "Notes from above.", tags: ["Bar"] },
-    {id: 2, name: "Oscar Waczynski", partySize: 2, quoted: 2, createdAt: Date.now() - 1000*60, tags: ["Booth", "Inside"]},
-    {id: 3, name: "Elon Musk", partySize: 6, quoted: 15, createdAt: Date.now()- 1000*60*5, tags: ["Outside"]},
-    {id: 4, name: "Amara Grey Oxrud", partySize: 3, quoted: 10, createdAt: Date.now() - 1000*60*14, tags: []},
-
+    {id: 1, name: "Alex", partySize: 3, quoted: 5, phone: "8015601194", createdAt: Date.now(), note: "Notes from above.", tags: ["Bar"] },
+    {id: 2, name: "Oscar", partySize: 2, quoted: 2, createdAt: Date.now() - 1000*60, tags: ["Booth", "Inside"]},
+    {id: 3, name: "Elon", partySize: 6, quoted: 15, createdAt: Date.now()- 1000*60*5, tags: ["Outside"]},
+    {id: 4, name: "Amara", partySize: 3, quoted: 10, createdAt: Date.now() - 1000*60*14, tags: []},
     {id: 5, name: "Kivanc", partySize: 3, quoted: 5, phone: "8015601194", createdAt: Date.now(), note: "Notes from above.", tags: ["Bar"] },
     {id: 6, name: "Ricky", partySize: 2, quoted: 2, createdAt: Date.now() - 1000*60, tags: ["Booth", "Inside"]},
     {id: 7, name: "Nate", partySize: 6, quoted: 15, createdAt: Date.now()- 1000*60*5, tags: ["Outside"]},

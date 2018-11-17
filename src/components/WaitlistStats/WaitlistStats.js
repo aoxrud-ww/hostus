@@ -26,8 +26,7 @@ class WaitTimesBySize extends PureComponent {
 class WaitlistStats extends PureComponent {
   render() {
     return (
-      <div className='card'>
-        <h1 className={styles.primaryHeadline}>Average Wait Times</h1>
+      <div className={styles.container}>
         <ul className={styles.waitTimesList}>
           {this.props.waitTimes.map(metric => (
             <li key={metric.label} className={styles.waitTimeItem}>

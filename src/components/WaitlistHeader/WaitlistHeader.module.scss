@@ -5,16 +5,15 @@
   color: rgba(0,0,0,.5);
   position: sticky;
   top: 0;
-  border-bottom: 2px solid #E7EEF9;
   font-size: 12px;
   letter-spacing: 1px;
-  padding: 0.5rem 1rem .1rem 1rem;
-  background-color: #ffffff;
+  padding: 0.5rem 1rem;
   z-index: 1;
 }
 
 .name {
-  flex-grow: 2;
+  width: 150px;
+  flex-grow: 1;
 }
 
 .partySize {
@@ -22,15 +21,14 @@
   width: 40px;
   flex-grow: 0;
 }
+.tags {
+  flex-shrink: 0;
+  width: 200px;
+  flex-grow: 2;
+}
 
 .waiting, .quoted {
   flex-shrink: 0;
   width: 70px;
   text-align: right;
-}
-
-.quoted {
-  @include tablet {
-    display: none;
-  }
 }

@@ -3,7 +3,9 @@ import WaitlistItem from '../WaitlistItem/WaitlistItem.js';
 import styles from './Waitlist.module.scss';
 import { connect } from "react-redux";
 import SearchInput from '../SearchInput/SearchInput.js';
+import Button from '../Button/Button.js';
 import SearchError from '../SearchError/SearchError.js';
+import WaitlistStats from '../WaitlistStats/WaitlistStats.js';
 import WaitlistHeader from '../WaitlistHeader/WaitlistHeader.js';
 import * as routes  from '../../routes.js';
 import {deleteWailistCustomer, notifyWaitlistCustomer, editWaitlistCustomer} from '../../actions';
@@ -16,6 +18,8 @@ class Waitlist extends Component {
 
     this.onSearch = this.onSearch.bind(this);
     this.onEdit = this.onEdit.bind(this);
+    this.onAdd = this.onAdd.bind(this);
+
     this.state = {
       list: this.props.list,
       transitionConfig: {
@@ -34,6 +38,10 @@ class Waitlist extends Component {
   onEdit(customer) {
     this.props.onEdit(customer);
     this.props.history.push(routes.CUSTOMER_PROFILE);
+  }
+
+  onAdd() {
+    this.props.history.push(routes.ADD_GUEST);
   }
 
   onSearch(searchQuery) {
@@ -59,9 +67,13 @@ class Waitlist extends Component {
   render() {
     const filteredList = this.getFilteredList(this.state.query);
     return (
-      <div className='card'>
-        <div className='card-header'>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.listOptions}>
           <SearchInput onChange={this.onSearch} value={this.state.query} placeholder="Search Waitlist..." />
+          <Button onClick={this.onAdd} theme="primary">Add Guest</Button>
+          </div>
+          <WaitlistStats className={styles.stats} />
         </div>
         {filteredList.length > 0 && <WaitlistHeader />}
         <ReactCSSTransitionGroup component="ul" className={styles.list} {...this.state.transitionConfig}>

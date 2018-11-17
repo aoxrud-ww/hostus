@@ -57,7 +57,7 @@ class CancelableButton extends Component {
 
   render() {
     return (
-      <Button theme='primary' onClick={this.click} disabled={this.state.didCancel}>
+      <Button theme='secondary' onClick={this.click} disabled={this.state.didCancel}>
         {!this.state.isExecuting && this.props.children}
         {this.state.isExecuting && !this.state.didCancel ? <ProgressionCircle strokeColor="#B534E2" duration={2000} /> : ''}
         {this.state.isExecuting && this.state.didCancel && this.props.children}
@@ -67,7 +67,8 @@ class CancelableButton extends Component {
 }
 
 CancelableButton.defaultProps = {
-  shouldCleanup: true
+  shouldCleanup: true,
+  onStatus: () => {}
 }
 
 CancelableButton.propTypes = {

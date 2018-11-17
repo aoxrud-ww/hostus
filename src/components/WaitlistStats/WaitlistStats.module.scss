@@ -1,26 +1,9 @@
 .container {
 }
 
-.primaryHeadline {
-  font-size: 24px;
-  margin: 0;
-  font-weight: 200;
-  color: #444;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.secondaryHeadline {
-  font-size: 20px;
-  font-weight: 200;
-  color: #444;
-  text-align: center;
-}
-
 .waitTimesList {
   display: flex;
   align-items: center;
-  // margin-bottom: 1.5rem;
 }
 
 .waitTimeItem {
@@ -28,6 +11,7 @@
   flex-basis: 0;
   flex-grow: 1;
   color: #444;
+  padding: 0 1rem;
 }
 
 .icon {
@@ -44,23 +28,8 @@
   margin-right: 10px;
 }
 
-
-.stats {
-  margin-top: 1rem;
-}
-
-.statsItem {
-  margin-bottom: 0.25rem;
-  font-size: 16px;
-  text-align: center;
-}
-
-.statsLabel {
-  color: #666;
-}
-
-.statsValue {
-  color: #444;
-  font-weight: bold;
-  margin-left: 10px;
+.label {
+  white-space: nowrap;
+  font-size: 12px;
+  color: rgba(0,0,0,0.6);
 }
